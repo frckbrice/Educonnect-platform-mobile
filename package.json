@@ -1,8 +1,14 @@
 {
+<<<<<<< HEAD
   "name": "learning-platform",
   "license": "0BSD",
   "main": "expo-router/entry",
   "version": "52.0.78",
+=======
+  "name": "learning_platform",
+  "main": "expo-router/entry",
+  "version": "1.0.0",
+>>>>>>> c59f1f8 (Initial commit)
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
@@ -39,10 +45,7 @@
     "react-native-safe-area-context": "4.12.0",
     "react-native-screens": "~4.4.0",
     "react-native-web": "~0.19.13",
-    "react-native-webview": "13.12.5",
-    "expo-dev-client": "~5.0.20",
-    "expo-insights": "~0.8.2",
-    "expo-updates": "~0.27.4"
+    "react-native-webview": "13.12.5"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -53,5 +56,6 @@
     "jest-expo": "~52.0.6",
     "react-test-renderer": "18.3.1",
     "typescript": "^5.3.3"
-  }
+  },
+  "private": true
 }
