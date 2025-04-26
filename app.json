@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "HelloWorld",
-    "slug": "expo-template-default",
+    "name": "Learning Platform",
+    "slug": "learning-platform",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -9,13 +9,15 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.bricefrck.learningplatform"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.bricefrck.learningplatform"
     },
     "web": {
       "bundler": "metro",
@@ -36,6 +38,18 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a7d1e141-915a-4bc2-a7b9-dcaacef1e236"
+      }
+    },
+    "owner": "bricefrck",
+    "updates": {
+      "url": "https://u.expo.dev/a7d1e141-915a-4bc2-a7b9-dcaacef1e236"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
     }
   }
 }
