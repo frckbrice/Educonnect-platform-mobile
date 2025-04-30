@@ -143,7 +143,7 @@ export default function Slide({
           />
         </TouchableOpacity>
       )}
-      {/* <Modal
+      <Modal
         animationType="fade"
         transparent={true}
         visible={modalVisible}
@@ -154,7 +154,7 @@ export default function Slide({
         <Pressable style={{ flex: 1 }} onPress={() => setModalVisible(false)}>
           <AuthModal setModalVisible={setModalVisible} />
         </Pressable>
-      </Modal> */}
+      </Modal>
     </>
   );
 }
