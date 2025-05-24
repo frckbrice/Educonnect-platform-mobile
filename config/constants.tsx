@@ -1,4 +1,4 @@
-import { IsIPAD } from "@/theme/app-constant";
+import { IsIPAD } from "@/utils/app-constant";
 import { Dimensions, Image } from "react-native";
 import { scale, verticalScale } from "react-native-size-matters";
 //@ts-ignore
@@ -7,7 +7,7 @@ import One from "@/assets/images/onboarding/1.png";
 import Two from "@/assets/images/onboarding/2.png";
 //@ts-ignore
 import Three from "@/assets/images/onboarding/3.png";
-import { OnboardingSlideTypes } from "./global";
+import { CourseDataType, OnboardingSlideTypes } from "./global";
 
 export const onBoardingSlides: OnboardingSlideTypes[] = [
   {
@@ -180,5 +180,215 @@ export const FAQData = [
     question: "Can I download any course videos?",
     answer:
       "For security reasons, course videos cannot be downloaded. However, you have lifetime access to each purchased course and can watch them anytime, anywhere with your account",
+  },
+];
+
+export const CourseData: any = [
+  {
+    id: "68311ee4733c3387b6f097bb",
+    title: "Full Stack Web Development",
+    description:
+      "Learn the fundamentals of web development, including HTML, CSS, JavaScript, and backend technologies.",
+    thumbnail: "https://example.com/course1.jpg",
+    slug: "multi-vendor-mern-stack-e-commerce-project-with-all-functionalities-absolutely-for-beginners",
+    videoUrl: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+    videoSection: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+    content: [
+      {
+        title: "Introduction to Web Development",
+        description:
+          "Learn the basics of web development, including HTML, CSS, and JavaScript.",
+        videoUrl: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+        videoLength: "10:00",
+        videoSection: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+      },
+      {
+        title: "HTML Basics",
+        description:
+          "Understand the structure of HTML documents and how to create web pages.",
+        videoUrl: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+        videoLength: "15:00",
+        videoSection: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+      }
+    ],
+    benefits: [{
+      title: "Hands-on Projects",
+      description:
+        "Build real-world projects to enhance your portfolio and practical skills.",
+    },
+    {
+      title: "Expert Instructors",
+      description:
+        "Learn from industry experts with years of experience in web development.",
+    },
+    {
+      title: "Community Support",
+      description:
+        "Join a community of learners and get support from fellow students and instructors.",
+    }],
+    prerequisites: [
+      {
+        title: "Basic Computer Skills",
+        description:
+          "Familiarity with using a computer and navigating the internet.",
+      },
+      {
+        title: "Basic HTML/CSS Knowledge",
+        description:
+          "Understanding of basic HTML and CSS concepts is helpful but not mandatory.",
+      },
+      {
+        title: "Willingness to Learn",
+        description:
+          "A positive attitude and eagerness to learn new technologies and concepts.",
+      }
+    ],
+    courseContent: [],
+    ratings: 3.5,
+    purchased: 1000,
+    estimatedPrice: 50,
+    price: 35,
+  },
+  {
+    id: "68311ede733c3387b6f097a5",
+    title: "Data Science and Machine Learning",
+    description:
+      "Dive into data analysis, visualization, and machine learning algorithms using Python.",
+    thumbnail: "https://example.com/course2.jpg",
+    slug: "build-your-mobile-app-development-career-with-react-native",
+    videoUrl: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+    videoSection: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+    content: [
+      {
+        title: "Introduction to Data Science",
+        description:
+          "Learn the basics of data science, including data collection and preprocessing.",
+        videoUrl: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+        videoLength: "12:00",
+        videoSection: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+      },
+      {
+        title: "Machine Learning Algorithms",
+        description:
+          "Understand various machine learning algorithms and their applications.",
+        videoUrl: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+        videoLength: "20:00",
+        videoSection: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+      },
+      {
+        title: "Data Visualization",
+        description:
+          "Learn how to visualize data using libraries like Matplotlib and Seaborn.",
+        videoUrl: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+        videoLength: "18:00",
+        videoSection: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+      },
+    ],
+    benefits: [{
+      title: "Hands-on Projects",
+      description:
+        "Build real-world projects to enhance your portfolio and practical skills.",
+    },
+    {
+      title: "Expert Instructors",
+      description:
+        "Learn from industry experts with years of experience in web development.",
+    },
+    {
+      title: "Community Support",
+      description:
+        "Join a community of learners and get support from fellow students and instructors.",
+    }],
+    prerequisites: [{
+      title: "Basic Computer Skills",
+      description:
+        "Familiarity with using a computer and navigating the internet.",
+    },
+    {
+      title: "Basic HTML/CSS Knowledge",
+      description:
+        "Understanding of basic HTML and CSS concepts is helpful but not mandatory.",
+    },
+    {
+      title: "Willingness to Learn",
+      description:
+        "A positive attitude and eagerness to learn new technologies and concepts.",
+    }],
+    courseContent: [],
+    purchased: 300,
+    ratings: 4,
+    estimatedPrice: 68,
+    price: 45,
+  },
+  {
+    id: "68311cbb56a29c9ab1715ea6",
+    title: "Advanced Python Programming",
+    description:
+      "Dive into data analysis, visualization, and machine learning algorithms using Python.",
+    thumbnail: "https://example.com/course2.jpg",
+    slug: "Advanced-Python-Programming",
+    videoUrl: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+    content: [
+      {
+        title: "Introduction to Data Science",
+        description:
+          "Learn the basics of data science, including data collection and preprocessing.",
+        videoUrl: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+        videoLength: "12:00",
+        videoSection: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+
+      },
+      {
+        title: "Machine Learning Algorithms",
+        description:
+          "Understand various machine learning algorithms and their applications.",
+        videoUrl: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+        videoLength: "20:00",
+        videoSection: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+      },
+      {
+        title: "Data Visualization",
+        description:
+          "Learn how to visualize data using libraries like Matplotlib and Seaborn.",
+        videoUrl: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+        videoLength: "18:00",
+        videoSection: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+      }
+    ],
+    benefits: [{
+      title: "Hands-on Projects",
+      description:
+        "Build real-world projects to enhance your portfolio and practical skills.",
+    },
+    {
+      title: "Expert Instructors",
+      description:
+        "Learn from industry experts with years of experience in web development.",
+    },
+    {
+      title: "Community Support",
+      description:
+        "Join a community of learners and get support from fellow students and instructors.",
+    }],
+    prerequisites: [{
+      title: "Basic Computer Skills",
+      description:
+        "Familiarity with using a computer and navigating the internet.",
+    },
+    {
+      title: "Basic HTML/CSS Knowledge",
+      description:
+        "Understanding of basic HTML and CSS concepts is helpful but not mandatory.",
+    },
+    {
+      title: "Willingness to Learn",
+      description:
+        "A positive attitude and eagerness to learn new technologies and concepts.",
+    }],
+    courseContent: [],
+    ratings: 3,
+    purchased: 456,
+    estimatedPrice: 45,
+    price: 30,
   },
 ];

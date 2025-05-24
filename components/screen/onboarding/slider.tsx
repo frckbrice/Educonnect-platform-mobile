@@ -99,9 +99,9 @@ const leftStyle = useAnimatedStyle(() => ({
 
 useEffect(() => {
     if(Platform.OS === 'ios') {
-        right.x.value = withSpring(WIDTH * .167);
+        right.x.value = withSpring(WIDTH * 0.167);
     }else {
-        right.x.value = withSpring(WIDTH * .185);
+        right.x.value = withSpring(WIDTH * 0.185);
     }
 }, [left, right]);
 

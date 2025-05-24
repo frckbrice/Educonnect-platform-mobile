@@ -1,12 +1,8 @@
+import HomeScreen from '@/components/screen/home/home-screen'
 import React from 'react'
-import { Text } from 'react-native'
 
-function index() {
+export default function Home() {
   return (
-    <div>
-      <Text> tab Index</Text>
-    </div>
+    <HomeScreen />
   )
 }
-
-export default index

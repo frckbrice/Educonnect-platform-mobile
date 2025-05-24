@@ -11,7 +11,6 @@ function Onboardingscreen() {
 
   const [index, setIndex] = React.useState(0);
   const prev = onBoardingSlides[index - 1];
-  const current = onBoardingSlides[index];
   const next = onBoardingSlides[index + 1];
 
   return (

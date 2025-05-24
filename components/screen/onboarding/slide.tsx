@@ -7,7 +7,7 @@ import {
   Platform,
   Modal,
 } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import { Defs, RadialGradient, Rect, Stop, Svg } from "react-native-svg";
 import { HEIGHT, WIDTH } from "@/config/constants";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
@@ -16,11 +16,12 @@ import {
   SCREEN_WIDTH,
   windowHeight,
   windowWidth,
-} from "@/theme/app-constant";
+} from "@/utils/app-constant";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
-// import AuthModal from "../auth/auth.modal";
 import { OnboardingSlideTypes } from "@/config/global";
+import AuthModal from "../../auth/auth-modal";
+import { useAuth } from "@/context/auth";
 
 export default function Slide({
   slide,
@@ -33,7 +34,9 @@ export default function Slide({
   setIndex: (value: number) => void;
   totalSlides: number;
 }) {
-  const [modalVisible, setModalVisible] = useState(false);
+  // const [modalVisible, setModalVisible] = useState(false);
+  const { modalVisible, setModalVisible } = useAuth();
+
 
   const handlePress = (index: number, setIndex: (index: number) => void) => {
     if (index === 2) {
@@ -152,7 +155,8 @@ export default function Slide({
         }}
       >
         <Pressable style={{ flex: 1 }} onPress={() => setModalVisible(false)}>
-          <AuthModal setModalVisible={setModalVisible} />
+          {/* the modal that contains auth providers */}
+          <AuthModal />
         </Pressable>
       </Modal>
     </>
