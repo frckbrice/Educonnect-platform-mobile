@@ -1,169 +1,183 @@
-import { View, Text, Pressable, Image, Platform } from "react-native";
+import { View, Text, TouchableOpacity, Image, Platform } from "react-native";
 import React, { useEffect } from "react";
 import { BlurView } from "expo-blur";
-import { fontSizes, windowHeight, windowWidth } from "@/theme/app-constant";
-import { GoogleSignin } from "@react-native-google-signin/google-signin";
+import { fontSizes, windowHeight, windowWidth } from "@/utils/app-constant";
 import { makeRedirectUri, useAuthRequest } from "expo-auth-session";
 import JWT from "expo-jwt";
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 import { router } from "expo-router";
 import * as WebBrowser from "expo-web-browser";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
+import { APP_SCHEME, GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, GOOGLE_CLIENT_ID } from "@/utils/env-constant";
+import { useAuth } from "@/context/auth";
+
 
 export default function AuthModal({
   setModalVisible,
 }: {
-  setModalVisible: (modal: boolean) => void;
+  setModalVisible?: (modal: boolean) => void;
 }) {
-  const configureGoogleSignIn = () => {
-    if (Platform.OS === "ios") {
-      GoogleSignin.configure({
-        iosClientId: process.env.EXPO_PUBLIC_IOS_GOOGLE_API_KEY,
-      });
-    } else {
-      GoogleSignin.configure({
-        webClientId:
-          "500604689956-74tau857bhoviihkt0jsqitldq4tsjlf.apps.googleusercontent.com",
-      });
-    }
-  };
 
-  useEffect(() => {
-    configureGoogleSignIn();
-  }, []);
+  const { signIn, isLoading, githubSignin, signOut } = useAuth();
 
-  // github auth start
-  const githubAuthEndpoints = {
-    authorizationEndpoint: "https://github.com/login/oauth/authorize",
-    tokenEndpoint: "https://github.com/login/oauth/access_token",
-    revocationEndpoint: `https://github.com/settings/connections/applications/${process.env.EXPO_PUBLIC_GITHUB_CLIENT_ID}`,
-  };
+  // const configureGoogleSignIn = () => {
+  //   if (Platform.OS === "ios") {
+  //     GoogleSignin.configure({
+  //       // iosClientId: process.env.EXPO_PUBLIC_IOS_GOOGLE_CLIENT_ID,
+  //       iosClientId: "959307778367-u0qdo2tfobdj4pggrqsi9k79pogp6k7o.apps.googleusercontent.com"
+  //     });
+  //   } else {
+  //     GoogleSignin.configure({
+  //       webClientId: GOOGLE_CLIENT_ID,
+  //     });
+  //   }
+  // };
 
-  const [request, response] = useAuthRequest(
-    {
-      clientId: process.env.EXPO_PUBLIC_GITHUB_CLIENT_ID!,
-      clientSecret: process.env.EXPO_PUBLIC_GITHUB_CLIENT_SECRET!,
-      scopes: ["identity"],
-      redirectUri: makeRedirectUri({
-        scheme: "becodemy",
-      }),
-    },
-    githubAuthEndpoints
-  );
+  // useEffect(() => {
+  //   configureGoogleSignIn();
+  // }, []);
 
-  useEffect(() => {
-    if (response?.type === "success") {
-      const { code } = response.params;
-      fetchAccessToken(code);
-    }
-  }, []);
+  // // github auth start
+  // const githubAuthEndpoints = {
+  //   authorizationEndpoint: "https://github.com/login/oauth/authorize",
+  //   tokenEndpoint: "https://github.com/login/oauth/access_token",
+  //   revocationEndpoint: `https://github.com/settings/connections/applications/${GITHUB_CLIENT_ID}`,
+  // };
 
-  const handleGithubLogin = async () => {
-    const result = await WebBrowser.openAuthSessionAsync(
-      request?.url!,
-      makeRedirectUri({
-        scheme: "becodemy",
-      })
-    );
+  // const [request, response] = useAuthRequest(
+  //   {
+  //     clientId: GITHUB_CLIENT_ID!,
+  //     clientSecret: GITHUB_CLIENT_SECRET!,
+  //     scopes: ["identity"],
+  //     redirectUri: makeRedirectUri({
+  //       scheme: APP_SCHEME,
+  //     }),
+  //   },
+  //   githubAuthEndpoints
+  // );
 
-    if (result.type === "success" && result.url) {
-      const urlParams = new URLSearchParams(result.url.split("?")[1]);
-      const code: any = urlParams.get("code");
-      fetchAccessToken(code);
-    }
-  };
+  // useEffect(() => {
+  //   if (response?.type === "success") {
+  //     const { code } = response.params;
+  //     fetchAccessToken(code);
+  //   }
+  // }, []);
 
-  const fetchAccessToken = async (code: string) => {
-    const tokenResponse = await fetch(
-      "https://github.com/login/oauth/access_token",
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: `client_id=${process.env.EXPO_PUBLIC_GITHUB_CLIENT_ID}&client_secret=${process.env.EXPO_PUBLIC_GITHUB_CLIENT_SECRET}&code=${code}`,
-      }
-    );
-    const tokenData = await tokenResponse.json();
-    const access_token = tokenData.access_token;
-    if (access_token) {
-      fetchUserInfo(access_token);
-    } else {
-      console.error("Error fetching access token:", tokenData);
-    }
-  };
+  // const handleGithubLogin = async () => {
+  //   const result = await WebBrowser.openAuthSessionAsync(
+  //     request?.url!,
+  //     makeRedirectUri({
+  //       scheme: APP_SCHEME,
+  //     })
+  //   );
 
-  const fetchUserInfo = async (token: string) => {
-    const userResponse = await fetch("https://api.github.com/user", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+  //   if (result.type === "success" && result.url) {
+  //     const urlParams = new URLSearchParams(result.url.split("?")[1]);
+  //     const code: any = urlParams.get("code");
+  //     fetchAccessToken(code);
+  //   }
+  // };
 
-    const userData = await userResponse.json();
-    await authHandler({
-      name: userData.name!,
-      email: userData.email!,
-      avatar: userData.avatar_url!,
-    });
-  };
-  // github auth end
+  // const fetchAccessToken = async (code: string) => {
 
-  const googleSignIn = async () => {
-    try {
-      await GoogleSignin.hasPlayServices();
-      const userInfo = await GoogleSignin.signIn();
-      await authHandler({
-        name: userInfo.user.name!,
-        email: userInfo.user.email!,
-        avatar: userInfo.user.photo!,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //   const tokenResponse = await fetch(
+  //     "https://github.com/login/oauth/access_token",
+  //     {
+  //       method: "POST",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/x-www-form-urlencoded",
+  //       },
+  //       body: `client_id=${GITHUB_CLIENT_ID}&client_secret=${GITHUB_CLIENT_SECRET}&code=${code}`,
+  //     }
+  //   );
+  //   const tokenData = await tokenResponse.json();
+  //   const access_token = tokenData.access_token;
 
-  const authHandler = async ({
-    name,
-    email,
-    avatar,
-  }: {
-    name: string;
-    email: string;
-    avatar: string;
-  }) => {
-    const user = {
-      name,
-      email,
-      avatar,
-    };
-    const token = JWT.encode(
-      {
-        ...user,
-      },
-      process.env.EXPO_PUBLIC_JWT_SECRET_KEY!
-    );
-    const res = await axios.post(
-      `${process.env.EXPO_PUBLIC_SERVER_URI}/login`,
-      {
-        signedToken: token,
-      }
-    );
-    await SecureStore.setItemAsync("accessToken", res.data.accessToken);
-    await SecureStore.setItemAsync("name", name);
-    await SecureStore.setItemAsync("email", email);
-    await SecureStore.setItemAsync("avatar", email);
+  //   console.log("access_token", access_token);
 
-    setModalVisible(false);
-    router.push("/(tabs)");
-  };
+  //   if (access_token) {
+  //     fetchUserInfo(access_token);
+  //   } else {
+  //     console.error("Error fetching access token:", tokenData);
+  //   }
+  // };
+
+  // const fetchUserInfo = async (token: string) => {
+  //   const userResponse = await fetch("https://api.github.com/user", {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   });
+
+  //   const userData = await userResponse.json();
+
+  //   console.log("User data from github:", userData);
+  //   // await authHandler({
+  //   //   name: userData.name!,
+  //   //   email: userData.email!,
+  //   //   avatar: userData.avatar_url!,
+  //   // });
+  // };
+  // // github auth end
+
+  // // google IOS signin
+  // const googleSignin = async () => {
+  //   try {
+  //     await GoogleSignin.hasPlayServices();
+  //     const userInfo = await GoogleSignin.signIn();
+  //     console.log({ userInfo });
+  //     await authHandler({
+  //       name: userInfo.data?.user.name!,
+  //       email: userInfo.data?.user.email!,
+  //       avatar: userInfo.data?.user.photo!,
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // const authHandler = async ({
+  //   name,
+  //   email,
+  //   avatar,
+  // }: {
+  //   name: string;
+  //   email: string;
+  //   avatar: string;
+  // }) => {
+  //   const user = {
+  //     name,
+  //     email,
+  //     avatar,
+  //   };
+  //   const token = JWT.encode(
+  //     {
+  //       ...user,
+  //     },
+  //     process.env.EXPO_PUBLIC_JWT_SECRET_KEY!
+  //   );
+  //   const res = await axios.post(
+  //     `${process.env.EXPO_PUBLIC_SERVER_URI}/login`,
+  //     {
+  //       signedToken: token,
+  //     }
+  //   );
+  //   await SecureStore.setItemAsync("accessToken", res.data.accessToken);
+  //   await SecureStore.setItemAsync("name", name);
+  //   await SecureStore.setItemAsync("email", email);
+  //   await SecureStore.setItemAsync("avatar", email);
+
+  // setModalVisible(false);
+  //   router.push("/(tabs)");
+  // };
 
   return (
-    <BlurView
+    <BlurView // this is set for the background blur view
       style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
     >
-      <Pressable
+      <TouchableOpacity
         style={{
           width: windowWidth(420),
           height: windowHeight(250),
@@ -180,7 +194,15 @@ export default function AuthModal({
             fontFamily: "Poppins_700Bold",
           }}
         >
-          Join to Becodemy
+          Join
+        </Text>
+        <Text
+          style={{
+            fontSize: fontSizes.FONT35,
+            fontFamily: "Poppins_700Bold",
+          }}
+        >
+          EduconnectEd-cm
         </Text>
         <Text
           style={{
@@ -189,7 +211,7 @@ export default function AuthModal({
             fontFamily: "Poppins_300Light",
           }}
         >
-          It's easier than your imagination!
+          Aussi facile que votre imagination!
         </Text>
         <View
           style={{
@@ -198,7 +220,15 @@ export default function AuthModal({
             gap: windowWidth(20),
           }}
         >
-          <Pressable onPress={googleSignIn}>
+          <TouchableOpacity
+            onPressIn={() => {
+              signIn();
+              // setTimeout(() => {
+              //   setModalVisible(false);
+              // }, 2000);
+            }}
+            disabled={isLoading}
+          >
             <Image
               source={require("@/assets/images/onboarding/google.png")}
               style={{
@@ -207,8 +237,15 @@ export default function AuthModal({
                 resizeMode: "contain",
               }}
             />
-          </Pressable>
-          <Pressable onPress={() => handleGithubLogin()}>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              githubSignin();
+              // setTimeout(() => {
+              //   setModalVisible(false);
+              // }, 2000);
+            }}
+          >
             <Image
               source={require("@/assets/images/onboarding/github.png")}
               style={{
@@ -217,8 +254,10 @@ export default function AuthModal({
                 resizeMode: "contain",
               }}
             />
-          </Pressable>
-          <Pressable>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => signOut()}
+          >
             <Image
               source={require("@/assets/images/onboarding/apple.png")}
               style={{
@@ -227,9 +266,9 @@ export default function AuthModal({
                 resizeMode: "contain",
               }}
             />
-          </Pressable>
+          </TouchableOpacity>
         </View>
-      </Pressable>
+      </TouchableOpacity>
     </BlurView>
   );
 }

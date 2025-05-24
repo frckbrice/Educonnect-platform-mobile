@@ -2,6 +2,8 @@
 
 # dependencies
 node_modules/
+ios/
+android/
 
 # Expo
 .expo/
@@ -36,3 +38,6 @@ yarn-error.*
 *.tsbuildinfo
 
 app-example
+
+my-keystore.jks
+

@@ -1,12 +1,20 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "strict": true,
     "baseUrl": "./",
     "paths": {
-      "@/*": ["./*"]
-    }
-    
+      "@/*": [
+        "./*"
+      ]
+    },
+    "lib": [
+      "dom",
+      "esnext"
+    ],
+    "target": "esnext"
   },
   "include": [
     "**/*.ts",

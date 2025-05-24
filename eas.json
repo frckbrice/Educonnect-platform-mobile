@@ -1,43 +1,29 @@
 {
   "cli": {
-    "version": ">= 16.3.3",
+    "version": ">= 16.4.0",
     "appVersionSource": "remote"
   },
   "build": {
     "development": {
       "developmentClient": true,
       "distribution": "internal",
-      "android": {
-        "image": "latest"
+      "ios": {
+        "resourceClass": "m-medium",
+        // "simulator": true
       },
-      "ios": {
-        "image": "latest"
-      }
-    },
-    "development-simulator": {
-      "extends": "development",
-      "ios": {
-        "simulator": true
+      "android": {
+        "resourceClass": "medium",
+        "gradleCommand": ":app:assembleDebug",
+        "buildType": "apk"
       }
     },
     "preview": {
-      "distribution": "internal",
-      "channel": "main",
-      "android": {
-        "image": "latest"
-      },
-      "ios": {
-        "image": "latest"
-      }
+      "distribution": "internal"
     },
     "production": {
-      "channel": "production",
       "autoIncrement": true,
       "android": {
-        "image": "latest"
-      },
-      "ios": {
-        "image": "latest"
+        "buildType": "app-bundle"
       }
     }
   },
