@@ -11,7 +11,8 @@ import {
 } from "@expo-google-fonts/poppins";
 // import { withIAPContext } from "react-native-iap";
 // import { NotificationProvider } from "@/context/notification.provider";
-import { LogBox } from "react-native";
+import { LogBox, } from "react-native";
+import { StatusBar } from "expo-status-bar";
 import { AuthProvider } from "@/context/auth";
 
 LogBox.ignoreAllLogs();
@@ -27,6 +28,7 @@ function RootLayout() {
   });
 
   return (
+    <>
     <AuthProvider>
     <ThemeProvider>
         {/* <NotificationProvider> */}
@@ -40,6 +42,9 @@ function RootLayout() {
         {/* </NotificationProvider> */}
     </ThemeProvider>
     </AuthProvider>
+      {/* set the status bar base on the platform  */}
+      <StatusBar style="auto" />
+    </>
   );
 }
 

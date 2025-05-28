@@ -14,6 +14,13 @@ export default ({config}: ConfigContext): ExpoConfig => {
     },
     android: {
       ...config.android,
-  }
+    },
+    "owner": "franckbriceavom",
+    "version": "1.0.0",
+    "extra": {
+      "eas": {
+        "projectId": "505d0288-acb5-4b09-8e77-9b51762c3190"
+      }
+    }
   }
 };

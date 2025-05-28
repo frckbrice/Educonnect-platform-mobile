@@ -11,7 +11,7 @@ const AnimatedPath = Animated.createAnimatedComponent(Path);
 
 type WaveProps = {
   side: Side;
-  children: React.ReactElement;
+  children: React.ReactElement<{ slide: { color: string }; color: string }>;
   position: Vector<SharedValue<number>>;
   isTransitioning: SharedValue<boolean>;
 }
@@ -86,8 +86,8 @@ function Wave({
       <AnimatedPath
         fill={
           Platform.OS === "android"
-            ? children.slide.color
-            : children.color
+            ? children.props.slide.color
+            : children.props.color
         }
         animatedProps={animatedProps}
       />
