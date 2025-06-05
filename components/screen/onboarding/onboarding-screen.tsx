@@ -1,11 +1,8 @@
 import { onBoardingSlides } from '@/config/constants';
-import React from 'react'
-import { Text, View } from 'react-native';
+import React from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import Slider from './slider';
 import Slide from './slide';
-
-
+import Slider from './slider';
 
 function Onboardingscreen() {
 

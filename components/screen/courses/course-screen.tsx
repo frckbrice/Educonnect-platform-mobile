@@ -1,25 +1,53 @@
-import { FlatList, ScrollView, StatusBar, Text, View } from "react-native";
-import React, { useState } from "react";
+import CourseCard from "@/components/card/course-card";
+import GradiantText from "@/components/common/gradient-text";
+import SkeltonLoader from "@/components/common/skelton";
+import { CourseData } from "@/config/constants";
 import { useTheme } from "@/context/theme.context";
-import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
-import { SafeAreaView } from "react-native-safe-area-context";
+import useGetCourses from "@/hooks/use-course";
 import {
     fontSizes,
-    IsAndroid,
     windowHeight,
-    windowWidth,
+    windowWidth
 } from "@/utils/app-constant";
-import GradiantText from "@/components/common/gradient-text";
+import React, { useEffect, useRef, useState } from "react";
+import { ActivityIndicator, FlatList, StatusBar, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { scale, verticalScale } from "react-native-size-matters";
-import SkeltonLoader from "@/components/common/skelton";
-import CourseCard from "@/components/card/course-card";
-import useGetCourses from "@/hooks/use-course";
-import { CourseData } from "@/config/constants";
 
 
 export default function CoursesScreen() {
     const { theme } = useTheme();
     const { courses, loading } = useGetCourses();
+
+    const [ready, setReady] = useState(false);
+    const isMounted = useRef(true);
+
+    // Guard to prevent view rendering too early
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (isMounted.current) setReady(true);
+        }, 500); // Slight delay to let native views settle
+
+        return () => {
+            isMounted.current = false;
+            clearTimeout(timer);
+        };
+    }, []);
+
+    if (!ready) {
+        return (
+            <View
+                style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: theme.dark ? "#101010" : "#fff",
+                }}
+            >
+                <ActivityIndicator size="large" color="#12BB70" />
+            </View>
+        );
+    }
 
     return (
         <SafeAreaView
@@ -50,7 +78,8 @@ export default function CoursesScreen() {
                         }}
                     >
                         <FlatList
-                            data={courses?.length ? courses : CourseData}
+                                // data={courses?.length ? courses : CourseData}
+                                data={CourseData}
                             ListHeaderComponent={() => (
                                 <View style={{ marginHorizontal: windowWidth(20) }}>
                                     <View

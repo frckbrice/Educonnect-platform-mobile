@@ -1,5 +1,6 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import Ratings from "@/components/common/ratings";
+import { CourseType } from "@/config/global";
+import { useTheme } from "@/context/theme.context";
 import {
     fontSizes,
     IsAndroid,
@@ -7,12 +8,11 @@ import {
     windowHeight,
     windowWidth,
 } from "@/utils/app-constant";
-import { useTheme } from "@/context/theme.context";
-import Ratings from "@/components/common/ratings";
 import { Feather } from "@expo/vector-icons";
-import { scale } from "react-native-size-matters";
-import { CourseType } from "@/config/global";
 import { useRouter } from 'expo-router';
+import React from "react";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { scale } from "react-native-size-matters";
 
 
 export default function CourseCard({ item }: { item: CourseType }) {
@@ -20,10 +20,11 @@ export default function CourseCard({ item }: { item: CourseType }) {
     const router = useRouter();
 
     return (
-        <Pressable
+        <TouchableOpacity
             style={{
                 paddingHorizontal: windowWidth(5),
                 paddingVertical: windowHeight(5),
+
             }}
             onPress={() =>
                 router.push({
@@ -45,7 +46,7 @@ export default function CourseCard({ item }: { item: CourseType }) {
                     },
                 ]}
             >
-                {/* you need to change this images */}
+                {/* you need to change this images to fit the new added and remove the mocked ones*/}
                 <Image
                     source={{
                         uri:
@@ -152,7 +153,7 @@ export default function CourseCard({ item }: { item: CourseType }) {
                     </View>
                 </View>
             </View>
-        </Pressable>
+        </TouchableOpacity>
     );
 }
 

@@ -135,7 +135,7 @@ export default function CourseLesson({
                                                         borderRadius: 8,
                                                         marginVertical: verticalScale(5),
                                                     }}
-                                                    key={index}
+                                                    key={index + Date.now()}
                                                 >
                                                     <View style={styles.itemContainer}>
                                                         <View style={styles.itemContainerWrapper}>

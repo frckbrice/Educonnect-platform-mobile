@@ -1,23 +1,23 @@
 
 // libraries imports
-import React from 'react';
-import * as WebBrowser from 'expo-web-browser';
 import { AuthUSer } from '@/components/auth/type';
 import {
     AuthError,
     AuthRequestConfig,
     DiscoveryDocument,
-    exchangeCodeAsync,
     makeRedirectUri,
     useAuthRequest
 } from 'expo-auth-session';
-import { Platform } from 'react-native';
+import * as WebBrowser from 'expo-web-browser';
 import * as jose from 'jose';
+import React from 'react';
+import { Platform } from 'react-native';
 
 // local imports
-import { APP_SCHEME, AUTH_TOKEN_NAME, BASE_URL, GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, REFRESH_TOKEN_NAME } from '@/utils/env-constant';
-import { useRouter } from 'expo-router';
 import { tokenCache } from '@/utils/cache';
+import { APP_SCHEME, AUTH_TOKEN_NAME, BASE_URL, GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, REFRESH_TOKEN_NAME } from '@/utils/env-constant';
+import { useRouter, } from 'expo-router';
+
 
 WebBrowser.maybeCompleteAuthSession(); //In order to close the popup window on web,
 
@@ -95,6 +95,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     // set refresh variable to avoid multiple refresh token at the same time
     const refreshInProgressRef = React.useRef(false);
+    const isMounted = React.useRef(true);
+
+    React.useEffect(() => {
+        isMounted.current = true;
+        return () => {
+            isMounted.current = false;
+        };
+    }, []);
 
     React.useEffect(() => {
         // this function is called when the user hit to continue on Oauth
@@ -134,7 +142,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 const accessToken = await tokenCache?.getToken(AUTH_TOKEN_NAME);
                 const refreshToken = await tokenCache?.getToken(REFRESH_TOKEN_NAME);
 
-
+                // console.log({ token: accessToken })
                 if (accessToken) {
                     // console.log("in restore session, accessToken", accessToken)
                     try {
@@ -153,8 +161,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                                 setRefreshToken(refreshToken);
 
                             setUser(decoded as AuthUSer);
-                            router.push('/(tabs)'); // redirect to the home page
-
+                            setTimeout(() => {
+                                if (isMounted.current) {
+                                    router.push('/(tabs)');
+                                }
+                            }, 100);
                         } else if (refreshToken) {
                             // log them to check
                             console.log("in restore session, refreshToken", refreshToken ? 'exists' : 'does not exist')
@@ -446,7 +457,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                     console.error("error from github token response", error);
                 }
 
-
                 if (isWeb) {
                     const userData = await tokenResponse?.json();
 
@@ -517,7 +527,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             setRefreshToken(newRefreshToken);
             await tokenCache?.saveToken(REFRESH_TOKEN_NAME, newRefreshToken)
         }
-        router.push('/(tabs)'); // redirect to the home page
+        setTimeout(() => {
+            if (isMounted.current) {
+                router.push('/(tabs)');
+            }
+        }, 100);// redirect to the home page
     }
 
     const fetchWithAuth = async (url: string, options: RequestInit) => {

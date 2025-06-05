@@ -48,6 +48,7 @@ import { BenefitsType, CourseDataType, CourseType, OrderType, ReviewsType } from
 import { API_URL } from "@/utils/env-constant";
 
 export default function CourseDetailsScreen() {
+
     const params: any = useGlobalSearchParams();
     const [activeButton, setActiveButton] = useState("About");
     const { apiUser, loader: userLoader } = useUser();
@@ -61,6 +62,9 @@ export default function CourseDetailsScreen() {
     const courseContent: CourseDataType[] | any = JSON.parse(
         params?.courseContent
     );
+
+    const { theme } = useTheme();
+
 
     // useEffect(() => {
     //     const init = async () => {
@@ -178,7 +182,6 @@ export default function CourseDetailsScreen() {
     //     }
     // };
 
-    const { theme } = useTheme();
 
     const reviewsFetchingHandler = async () => {
         setActiveButton("Reviews");
@@ -204,7 +207,9 @@ export default function CourseDetailsScreen() {
 
     return (
         <View style={{ flex: 1, backgroundColor: theme.dark ? "#131313" : "#fff" }}>
-            <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
+            <ScrollView showsVerticalScrollIndicator={false} style={{
+                flex: 1, paddingHorizontal: windowWidth(10)
+            }}>
                 <View style={{ padding: windowWidth(15) }}>
                     <Image
                         source={{
@@ -219,12 +224,12 @@ export default function CourseDetailsScreen() {
                         }}
                         resizeMode="contain"
                         style={{
-                            width: IsAndroid ? SCREEN_WIDTH - 40 : SCREEN_WIDTH - 25,
+                            width: IsAndroid ? SCREEN_WIDTH - 40 : SCREEN_WIDTH - 20,
                             height: IsAndroid
                                 ? (SCREEN_WIDTH - 28) * 0.5625
                                 : (SCREEN_WIDTH - 40) * 0.5625,
                             alignSelf: "center",
-                            borderRadius: windowWidth(10),
+                            borderRadius: scale(20),
                         }}
                     />
                     <Text
@@ -304,7 +309,7 @@ export default function CourseDetailsScreen() {
                             >
                                 <Ionicons
                                     name="checkmark-done-outline"
-                                    size={scale(17)}
+                                    size={Math.round(scale(17))}
                                     color={theme.dark ? "#fff" : "#000"}
                                 />
                                 <Text
@@ -343,7 +348,7 @@ export default function CourseDetailsScreen() {
                             >
                                 <Ionicons
                                     name="checkmark-done-outline"
-                                    size={scale(17)}
+                                    size={Math.round(scale(17))}
                                     color={theme.dark ? "#fff" : "#000"}
                                 />
                                 <Text
@@ -369,8 +374,8 @@ export default function CourseDetailsScreen() {
                     {activeButton === "About" && (
                         <View
                             style={{
-                                marginHorizontal: scale(12),
-                                marginVertical: verticalScale(10),
+                                marginHorizontal: Math.round(scale(12)),
+                                marginVertical: Math.round(verticalScale(10)),
                             }}
                         >
                             <Text
@@ -416,8 +421,8 @@ export default function CourseDetailsScreen() {
                     {activeButton === "Lessons" && (
                         <View
                             style={{
-                                marginHorizontal: verticalScale(16),
-                                marginVertical: scale(15),
+                                marginHorizontal: Math.round(verticalScale(16)),
+                                marginVertical: Math.round(scale(15)),
                             }}
                         >
                             <CourseLesson courseDetails={courseContent} />
@@ -438,7 +443,7 @@ export default function CourseDetailsScreen() {
                                                 style={{
                                                     flex: 1,
                                                     flexDirection: "row",
-                                                    gap: scale(10),
+                                                    gap: Math.round(scale(10)),
                                                     marginVertical: verticalScale(10),
                                                 }}
                                                 animate={{
@@ -454,14 +459,14 @@ export default function CourseDetailsScreen() {
                                                 <View>
                                                     <Skeleton
                                                         colorMode={theme.dark ? "dark" : "light"}
-                                                        width={scale(240)}
+                                                        width={Math.round(scale(240))}
                                                         height={verticalScale(22)}
                                                     />
                                                     <Spacer height={verticalScale(15)} />
                                                     <Skeleton
                                                         colorMode={theme.dark ? "dark" : "light"}
-                                                        width={scale(240)}
-                                                        height={verticalScale(22)}
+                                                        width={Math.round(scale(240))}
+                                                        height={Math.round(verticalScale(22))}
                                                     />
                                                 </View>
                                             </MotiView>

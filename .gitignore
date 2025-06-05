@@ -2,8 +2,7 @@
 
 # dependencies
 node_modules/
-ios/
-android/
+build-1748451839431.apk
 
 # Expo
 .expo/
@@ -82,3 +81,6 @@ yarn-error.*
 *.tsbuildinfo
 
 # @end expo-cli
+
+android/
+ios/

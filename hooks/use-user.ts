@@ -22,12 +22,12 @@ export default function useUser() {
         if (apiUser)
             return setLoader(false);
 
-
         try {
             await setAuthorizationHeader();
             const response = await axios.get(
                 `${API_URL}/users/current`
             );
+            console.log("response", response.data.data,)
             const { name, email, avatarUrl: avatar } = response.data.data;
             await SecureStore.setItemAsync("currentUser", JSON.stringify({ name, email, avatar }));
 

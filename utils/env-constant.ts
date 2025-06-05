@@ -5,19 +5,47 @@
  * Import from this file instead of defining constants in individual files.
  */
 
-import Constants from "expo-constants";
 
-// get the local IP address
-const uri = Constants?.expoConfig?.hostUri?.split(":")?.shift()?.concat(':5001') || "localhost:5001";
+import Constants from 'expo-constants';
 
-console.log("\n\n the API URL", `http://${uri}`);
+// Set your IP in .env or app.config.js
+const getApiConfig = () => {
+  // Priority: env vars > hostUri > fallback
+  const envBaseUrl = process.env.NODE_ENV === "production" ? process.env.EXPO_PUBLIC_BASE_URL : process.env.EXPO_PUBLIC_LOCAL_URL;
+  const envApiUrl = process.env.EXPO_PUBLIC_API_URL;
 
-const redirectUrl = `${uri}/api/auth/callback`;
-const redirectUrlWeb = `${uri}/api/auth/callback`;
-const redirectUrlApple = `${uri}/api/auth/apple/callback`;
-const redirectUrlGoogle = `${uri}/api/auth/google/callback`;
-const redirectUrlGithub = `${uri}/api/auth/github/callback`;
-const redirectUrlFacebook = `${uri}/api/auth/facebook/callback`;
+  if (envBaseUrl && envApiUrl) {
+    return {
+      baseUrl: envBaseUrl,
+      apiUrl: envApiUrl
+    };
+  }
+
+  // Fallback to hostUri logic
+  const hostUri = Constants?.expoConfig?.hostUri;
+  if (hostUri) {
+    const ip = hostUri.split(":")[0];
+    return {
+      baseUrl: `http://${ip}:8081`,
+      apiUrl: `http://${ip}:5001/api/v1`
+    };
+  }
+
+  // Final fallback
+  return {
+    baseUrl: 'http://localhost:8081',
+    apiUrl: 'http://localhost:5001/api/v1'
+  };
+};
+
+const { baseUrl, apiUrl } = getApiConfig();
+
+export const API_URL = `${apiUrl}`;
+export const BASE_URL = `${baseUrl}`;
+
+console.log("\n\n the API URL", API_URL);
+console.log('\n\n the BASE URL', BASE_URL);
+
 
 // Authentication Constants
 export const AUTH_TOKEN_NAME = "accessToken";
@@ -48,9 +76,6 @@ export const GITHUB_CLIENT_SECRET = process.env.EXPO_PUBLIC_GITHUB_CLIENT_SECRET
 // export const APPLE_REDIRECT_URI = `${process.env.EXPO_PUBLIC_BASE_URL}/api/auth/apple/callback`;
 // export const APPLE_AUTH_URL = "https://appleid.apple.com/auth/authorize";
 
-// Environment Constants http://localhost:8081
-export const BASE_URL = process.env.EXPO_PUBLIC_BASE_URL;
-export const API_URL = `http://${uri}/api/v1`;
 
 // export const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export const APP_SCHEME = process.env.EXPO_PUBLIC_SCHEME;

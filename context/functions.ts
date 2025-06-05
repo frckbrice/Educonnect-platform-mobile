@@ -11,9 +11,17 @@ import {
 import * as jose from 'jose';
 
 // local imports
-import { AUTH_TOKEN_NAME, BASE_URL, REFRESH_TOKEN_NAME } from '@/utils/env-constant';
 import { tokenCache } from '@/utils/cache';
+import { AUTH_TOKEN_NAME, BASE_URL, REFRESH_TOKEN_NAME } from '@/utils/env-constant';
 import { Router } from 'expo-router';
+
+
+// delay function to wait for a specified time
+export const delay = (ms: number, fct: (() => void)) => new Promise(resolve => setTimeout(() => { resolve(fct()) }, ms));
+
+
+
+
 
 
 // set the token name
