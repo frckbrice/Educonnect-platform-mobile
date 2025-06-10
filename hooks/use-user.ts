@@ -1,7 +1,6 @@
-import React, { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import * as SecureStore from "expo-secure-store";
 import axios from "axios";
-import { AuthUSer } from "@/components/auth/type";
 import { API_URL } from "@/utils/env-constant";
 import { UserType } from "@/config/global";
 
@@ -27,7 +26,7 @@ export default function useUser() {
             const response = await axios.get(
                 `${API_URL}/users/current`
             );
-            console.log("response", response.data.data,)
+            // console.log("current user data: ", response.data.data);
             const { name, email, avatarUrl: avatar } = response.data.data;
             await SecureStore.setItemAsync("currentUser", JSON.stringify({ name, email, avatar }));
 

@@ -8,6 +8,7 @@ import Two from "@/assets/images/onboarding/2.png";
 //@ts-ignore
 import Three from "@/assets/images/onboarding/3.png";
 import { CourseDataType, OnboardingSlideTypes } from "./global";
+import { title } from "process";
 
 export const onBoardingSlides: OnboardingSlideTypes[] = [
   {
@@ -185,30 +186,96 @@ export const FAQData = [
 
 export const CourseData: any = [
   {
-    id: "68311ee4733c3387b6f097bb",
+    id: "683d77d4a1b65694b0cfd348",
     title: "Full Stack Web Development",
     description:
       "Learn the fundamentals of web development, including HTML, CSS, JavaScript, and backend technologies.",
-    thumbnail: "https://example.com/course1.jpg",
+    thumbnail: "https://images.pexels.com/photos/15099919/pexels-photo-15099919/free-photo-of-portrait-of-a-woman-wearing-a-hat.jpeg?auto=compress&cs=tinysrgb&w=1200",
     slug: "multi-vendor-mern-stack-e-commerce-project-with-all-functionalities-absolutely-for-beginners",
-    videoUrl: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
-    videoSection: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
     content: [
       {
-        title: "Introduction to Web Development",
-        description:
-          "Learn the basics of web development, including HTML, CSS, and JavaScript.",
-        videoUrl: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
-        videoLength: "10:00",
-        videoSection: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+        id: "683d77d4a1b65694b0cfd34a",
+        "description": "Learn the basics of data science, including data collection and preprocessing.",
+        "title": "Introduction to Data Science",
+        "videoLength": "12:00",
+        "videoSection": "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+        "videoUrl": "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+        videoPlayer: "Vimeo",
+        courseId: "683d77d4a1b65694b0cfd348",
+        links: [
+          {
+            id: "507f1f77bcf86cd799439011",
+            title: "React Official Documentation",
+            url: "https://react.dev/learn",
+            contentId: "683d77d4a1b65694b0cfd34a"
+          },
+          {
+            id: "507f1f77bcf86cd799439012",
+            title: "expo documentation",
+            url: "https://docs.expo.dev/versions/latest/",
+            contentId: "683d77d4a1b65694b0cfd34a"
+          }
+        ]
+      },
+
+      {
+        id: "683d77d4a1b65694b0cfd349",
+        "description": "Understand various machine learning algorithms and their applications.",
+        "title": "Machine Learning Algorithms",
+        "videoLength": "20:00",
+        "videoSection": "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+        "videoUrl": "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+        videoPlayer: "YouTube",
+        courseId: "683d77d4a1b65694b0cfd348",
+        links: [
+          {
+            id: "507f1f77bcf86cd799439011",
+            title: "React Official Documentation",
+            url: "https://react.dev/learn",
+            contentId: "683d77d4a1b65694b0cfd34a"
+          },
+          {
+            id: "507f1f77bcf86cd799439012",
+            title: "expo documentation",
+            url: "https://docs.expo.dev/versions/latest/",
+            contentId: "683d77d4a1b65694b0cfd34a"
+          },
+          {
+            id: "507f1f77bcf86cd799439013",
+            title: "typeSript documentation",
+            url: "https://www.typescriptlang.org/docs/handbook/basic-types.html",
+            contentId: "683d77d4a1b65694b0cfd34a"
+          }
+        ]
       },
       {
-        title: "HTML Basics",
-        description:
-          "Understand the structure of HTML documents and how to create web pages.",
-        videoUrl: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
-        videoLength: "15:00",
-        videoSection: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+        id: "6845459ceec50cb7a58b3008",
+        "description": "Learn how to visualize data using libraries like Matplotlib and Seaborn.",
+        "title": "Data Visualization",
+        "videoLength": "18:00",
+        "videoSection": "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+        "videoUrl": "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+        videoPlayer: "YouTube",
+        courseId: "683d77d4a1b65694b0cfd348",
+        links: [
+          {
+            id: "507f1f77bcf86cd799439011",
+            title: "React Official Documentation",
+            url: "https://react.dev/learn",
+            contentId: "683d77d4a1b65694b0cfd34a"
+          },
+          {
+            id: "507f1f77bcf86cd799439012",
+            title: "expo documentation",
+            url: "https://docs.expo.dev/versions/latest/",
+            contentId: "683d77d4a1b65694b0cfd34a"
+          }, {
+            id: "507f1f77bcf86cd799439013",
+            title: "React-native documentation",
+            url: "https://reactnative.dev/docs/getting-started",
+            contentId: "683d77d4a1b65694b0cfd34a"
+          }
+        ]
       }
     ],
     benefits: [{
@@ -243,45 +310,101 @@ export const CourseData: any = [
           "A positive attitude and eagerness to learn new technologies and concepts.",
       }
     ],
-    courseContent: [],
     ratings: 3.5,
     purchased: 1000,
     estimatedPrice: 50,
     price: 35,
   },
   {
-    id: "68311ede733c3387b6f097a5",
+    id: "683d77d9a1b65694b0cfd35a",
     title: "Data Science and Machine Learning",
     description:
       "Dive into data analysis, visualization, and machine learning algorithms using Python.",
-    thumbnail: "https://example.com/course2.jpg",
+    thumbnail: "https://images.pexels.com/photos/2524224/pexels-photo-2524224.jpeg?auto=compress&cs=tinysrgb&w=1200",
     slug: "build-your-mobile-app-development-career-with-react-native",
-    videoUrl: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
-    videoSection: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
     content: [
       {
+        id: "683d77d4a1b65694b0cfd34a",
         title: "Introduction to Data Science",
         description:
           "Learn the basics of data science, including data collection and preprocessing.",
         videoUrl: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
         videoLength: "12:00",
         videoSection: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+        courseId: "683d77d9a1b65694b0cfd35a",
+        links: [
+          {
+            id: "507f1f77bcf86cd799439011",
+            title: "React Official Documentation",
+            url: "https://react.dev/learn",
+            contentId: "683d77d4a1b65694b0cfd34a"
+          },
+          {
+            id: "507f1f77bcf86cd799439012",
+            title: "expo documentation",
+            url: "https://docs.expo.dev/versions/latest/",
+            contentId: "683d77d4a1b65694b0cfd34a"
+          }
+        ]
       },
       {
+        id: "6845459ceec50cb7a58b3008",
         title: "Machine Learning Algorithms",
         description:
           "Understand various machine learning algorithms and their applications.",
         videoUrl: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
         videoLength: "20:00",
         videoSection: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+        courseId: "683d77d9a1b65694b0cfd35a",
+        links: [
+          {
+            id: "507f1f77bcf86cd799439011",
+            title: "React Official Documentation",
+            url: "https://react.dev/learn",
+            contentId: "683d77d4a1b65694b0cfd34a"
+          },
+          {
+            id: "507f1f77bcf86cd799439012",
+            title: "expo documentation",
+            url: "https://docs.expo.dev/versions/latest/",
+            contentId: "683d77d4a1b65694b0cfd34a"
+          },
+          {
+            id: "507f1f77bcf86cd799439013",
+            title: "typeSript documentation",
+            url: "https://www.typescriptlang.org/docs/handbook/basic-types.html",
+            contentId: "683d77d4a1b65694b0cfd34a"
+          }
+        ]
       },
       {
+        id: "683d77d4a1b65694b0cfd349",
         title: "Data Visualization",
         description:
           "Learn how to visualize data using libraries like Matplotlib and Seaborn.",
         videoUrl: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
         videoLength: "18:00",
         videoSection: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+        courseId: "683d77d9a1b65694b0cfd35a",
+        links: [
+          {
+            id: "507f1f77bcf86cd799439011",
+            title: "React Official Documentation",
+            url: "https://react.dev/learn",
+            contentId: "683d77d4a1b65694b0cfd34a"
+          },
+          {
+            id: "507f1f77bcf86cd799439012",
+            title: "expo documentation",
+            url: "https://docs.expo.dev/versions/latest/",
+            contentId: "683d77d4a1b65694b0cfd34a"
+          }, {
+            id: "507f1f77bcf86cd799439013",
+            title: "React-native documentation",
+            url: "https://reactnative.dev/docs/getting-started",
+            contentId: "683d77d4a1b65694b0cfd34a"
+          }
+        ]
       },
     ],
     benefits: [{
@@ -313,46 +436,78 @@ export const CourseData: any = [
       title: "Willingness to Learn",
       description:
         "A positive attitude and eagerness to learn new technologies and concepts.",
-    }],
-    courseContent: [],
+      }],
     purchased: 300,
     ratings: 4,
     estimatedPrice: 68,
     price: 45,
   },
   {
-    id: "68311cbb56a29c9ab1715ea6",
+    id: "683d77d9a1b65694b0cfd35b",
     title: "Advanced Python Programming",
     description:
       "Dive into data analysis, visualization, and machine learning algorithms using Python.",
-    thumbnail: "https://example.com/course2.jpg",
+    thumbnail: "https://images.pexels.com/photos/18485567/pexels-photo-18485567/free-photo-of-circular-economy-a-new-way-of-thinking-about-the-circular-economy.jpeg?auto=compress&cs=tinysrgb&w=1200",
     slug: "Advanced-Python-Programming",
-    videoUrl: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
     content: [
       {
+        id: "683d77d4a1b65694b0cfd349",
         title: "Introduction to Data Science",
         description:
           "Learn the basics of data science, including data collection and preprocessing.",
         videoUrl: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
         videoLength: "12:00",
         videoSection: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
-
+        courseId: "683d77d9a1b65694b0cfd35b",
+        links: [
+          {
+            id: "507f1f77bcf86cd799439011",
+            title: "React Official Documentation",
+            url: "https://react.dev/learn",
+            contentId: "683d77d4a1b65694b0cfd34a"
+          },
+          {
+            id: "507f1f77bcf86cd799439012",
+            title: "expo documentation",
+            url: "https://docs.expo.dev/versions/latest/",
+            contentId: "683d77d4a1b65694b0cfd34a"
+          }, {
+            id: "507f1f77bcf86cd799439013",
+            title: "React-native documentation",
+            url: "https://reactnative.dev/docs/getting-started",
+            contentId: "683d77d4a1b65694b0cfd34a"
+          }
+        ]
       },
       {
+        id: "683d77d4a1b65694b0cfd34a",
         title: "Machine Learning Algorithms",
         description:
           "Understand various machine learning algorithms and their applications.",
         videoUrl: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
         videoLength: "20:00",
         videoSection: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
-      },
-      {
-        title: "Data Visualization",
-        description:
-          "Learn how to visualize data using libraries like Matplotlib and Seaborn.",
-        videoUrl: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
-        videoLength: "18:00",
-        videoSection: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+        courseId: "683d77d4a1b65694b0cfd34a",
+        links: [
+          {
+            id: "507f1f77bcf86cd799439011",
+            title: "React Official Documentation",
+            url: "https://react.dev/learn",
+            contentId: "683d77d4a1b65694b0cfd34a"
+          },
+          {
+            id: "507f1f77bcf86cd799439012",
+            title: "expo documentation",
+            url: "https://docs.expo.dev/versions/latest/",
+            contentId: "683d77d4a1b65694b0cfd34a"
+          },
+          {
+            id: "507f1f77bcf86cd799439013",
+            title: "typeSript documentation",
+            url: "https://www.typescriptlang.org/docs/handbook/basic-types.html",
+            contentId: "683d77d4a1b65694b0cfd34a"
+          }
+        ]
       }
     ],
     benefits: [{
@@ -384,8 +539,7 @@ export const CourseData: any = [
       title: "Willingness to Learn",
       description:
         "A positive attitude and eagerness to learn new technologies and concepts.",
-    }],
-    courseContent: [],
+      }],
     ratings: 3,
     purchased: 456,
     estimatedPrice: 45,

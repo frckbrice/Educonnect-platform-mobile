@@ -13,11 +13,12 @@ minSdkVersion = Integer.parseInt(findProperty('android.minSdkVersion') ?: '24')
         google()
         mavenCentral()
     }
-    dependencies {
-        classpath('com.android.tools.build:gradle')
-        classpath('com.facebook.react:react-native-gradle-plugin')
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
-    }
+  dependencies {
+    classpath('com.android.tools.build:gradle:8.1.0')  // or a version compatible with your Gradle wrapper
+    classpath('com.facebook.react:react-native-gradle-plugin:0.79.3')  // match your React Native version
+    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+}
+
 }
 
 allprojects {

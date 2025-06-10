@@ -8,6 +8,14 @@ import { CourseDataType } from "@/config/global";
 import * as WebBrowser from "expo-web-browser";
 
 
+type TcourseLesson = {
+    description: string;
+    title: string;
+    videoLength: string;
+    videoSection: string;
+    videoUrl: string;
+}
+
 export default function CourseLesson({
     courseDetails,
 }: {
@@ -20,7 +28,7 @@ export default function CourseLesson({
 
     const videoSections: string[] = [
         ...new Set<string>(
-            courseDetails.map((item: CourseDataType) => item.videoSection)
+            courseDetails.map((video: CourseDataType) => video.videoSection)
         ),
     ];
 
@@ -44,13 +52,15 @@ export default function CourseLesson({
                 }}
             >
                 <View>
-                    {videoSections.map((item: string, index: number) => {
-                        const isSectionVisible = visibleSections.has(item);
+                    {videoSections.map((video: string, index: number) => {
+                        const isSectionVisible = visibleSections.has(video);
 
                         // filter videoes by section
-                        const sectionVideos: any[] = courseDetails?.filter(
-                            (i: any) => i.videoSection === item
+                        const sectionVideos: TcourseLesson[] = courseDetails?.filter(
+                            (i: any) => i.videoSection === video
                         );
+
+                        console.log("\n\n is section visible: ", isSectionVisible, "\n\n")
 
                         return (
                             <>
@@ -61,7 +71,7 @@ export default function CourseLesson({
                                         paddingVertical: verticalScale(5),
                                         borderBottomWidth: !isSectionVisible ? 1 : 0,
                                     }}
-                                    key={index}
+                                    key={index + new Date().getTime() + 1}
                                 >
                                     <View
                                         style={{
@@ -82,19 +92,45 @@ export default function CourseLesson({
                                             }}
                                             onPress={
                                                 () => {
-                                                    WebBrowser.openBrowserAsync(item);
+                                                    WebBrowser.openBrowserAsync(video);
                                                 }
                                             }
                                         >
                                             {
                                                 //    open the link in a new tab
-                                                item.length > 20
-                                                    ? item.substring(0, 30) + "..."
-                                                    : item
+                                                video.length > 20
+                                                    ? video.substring(0, 30) + "..."
+                                                    : video
                                             }
                                         </Text>
+                                    </View>
+                                    <View
+                                        // align elements
+                                        style={{
+                                            flexDirection: "row",
+                                            alignItems: "center",
+                                            justifyContent: "space-between"
+                                        }}
+                                    >
+
+                                        {!isSectionVisible ? (
+                                            <View
+                                            >
+                                                <Text
+                                                    style={{
+                                                        fontSize: fontSizes.FONT18,
+                                                        fontFamily: "Poppins_400Regular",
+                                                        color: theme.dark ? "#fff" : "#000",
+                                                    }}
+                                                >
+                                                    {sectionVideos?.length} Lessons
+                                                </Text>
+                                            </View>
+                                        ) : <Text>" "</Text>
+                                        }
                                         {isSectionVisible ? (
-                                            <TouchableOpacity onPress={() => toggleSection(item)}>
+                                            <TouchableOpacity
+                                                onPress={() => toggleSection(video)}>
                                                 <Entypo
                                                     name="chevron-up"
                                                     size={scale(20)}
@@ -102,7 +138,7 @@ export default function CourseLesson({
                                                 />
                                             </TouchableOpacity>
                                         ) : (
-                                            <TouchableOpacity onPress={() => toggleSection(item)}>
+                                                <TouchableOpacity onPress={() => toggleSection(video)}>
                                                 <Entypo
                                                     name="chevron-down"
                                                     size={scale(20)}
@@ -111,23 +147,12 @@ export default function CourseLesson({
                                             </TouchableOpacity>
                                         )}
                                     </View>
-                                    {!isSectionVisible && (
-                                        <Text
-                                            style={{
-                                                fontSize: fontSizes.FONT18,
-                                                fontFamily: "Poppins_400Regular",
-                                                color: theme.dark ? "#fff" : "#000",
-                                            }}
-                                        >
-                                            {sectionVideos?.length} Lessons
-                                        </Text>
-                                    )}
                                 </View>
 
                                 {isSectionVisible && (
                                     <>
                                         {sectionVideos.map(
-                                            (item: CourseDataType, index: number) => (
+                                            (video: TcourseLesson, index: number) => (
                                                 <View
                                                     style={{
                                                         borderWidth: 1,
@@ -156,7 +181,7 @@ export default function CourseLesson({
                                                                         },
                                                                     ]}
                                                                 >
-                                                                    {item.title}
+                                                                    {video.title}
                                                                 </Text>
                                                             </View>
                                                             <View style={styles.itemDataContainer}>
@@ -168,8 +193,8 @@ export default function CourseLesson({
                                                                         fontSize: fontSizes.FONT17,
                                                                     }}
                                                                 >
-                                                                    {item.videoLength}{" "}
-                                                                    {parseInt(item?.videoLength) > 60
+                                                                    {video.videoLength}{" "}
+                                                                    {parseInt(video?.videoLength) > 60
                                                                         ? "hours"
                                                                         : "minutes"}
                                                                 </Text>

@@ -5,16 +5,17 @@ import 'dotenv/config';
 const EAS_PROJECT_ID = process.env.EXPO_PUBLIC_EAS_PROJECT_ID!;
 
 const PROJECT_SLUG = process.env.EXPO_PUBLIC_PROJECT_SLUG;
-const OWNER = "project owner";
+const OWNER = "franckbriceavom";
 const IOS_URL_SHEME = process.env.EXPO_PUBLIC_IOS_GOOGLE_URL_SCHEME;
 
 // App production config
 const APP_NAME = "";
 const BUNDLE_IDENTIFIER = "";
 const PACKAGE_NAME = "";
-const ICON = "";
+const ICON = "./assets/images/icon.png";
+const SPLASH_ICON = "./assets/images/splash-icon.png";
 const ADAPTIVE_ICON = "";
-const SHEME = "app-scheme"
+const SHEME = "educonnected"
 const BASE_PROD_URL = process.env.EXPO_PUBLIC_BASE_URL;
 
 
@@ -24,7 +25,7 @@ const BASE_PROD_URL = process.env.EXPO_PUBLIC_BASE_URL;
 // the app.config.js used to hide some sensitive information like the api-keys
 export default ({ config }: ConfigContext): ExpoConfig => {
 
-  console.log(` building app for environment : `);
+  console.log(` building app for environment : `, process.env.NODE_ENV);
 
   return {
     ...config,
@@ -42,14 +43,14 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       "config": {
         "usesNonExemptEncryption": false
       },
-      "bundleIdentifier": "com.bricefrck.learning-platform",
+      "bundleIdentifier": "com.bricefrck.learningplatform.dev",
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.bricefrck.learning_platform"
+      "package": "com.bricefrck.learningplatform.dev",
     },
     "web": {
       "bundler": "metro",

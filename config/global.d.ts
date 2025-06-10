@@ -21,6 +21,7 @@ type UserType = {
     password: string;
     phone_number: string;
     avatar: string;
+    avatarUrl?: string;
     stripeCustomerId: string;
     githubUserName: string;
     role: string;

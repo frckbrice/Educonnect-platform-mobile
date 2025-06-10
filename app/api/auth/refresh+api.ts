@@ -305,7 +305,10 @@ export async function POST(request: Request) {
             return response;
         }
 
-
+        // console.log({
+        //     accessToken: newAccessToken,
+        //     refreshToken: newRefreshToken,
+        // })
 
         // For native platforms, return the new tokens in the response body
         return Response.json({

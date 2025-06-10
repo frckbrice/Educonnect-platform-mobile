@@ -24,7 +24,6 @@ export default function CourseCard({ item }: { item: CourseType }) {
             style={{
                 paddingHorizontal: windowWidth(5),
                 paddingVertical: windowHeight(5),
-
             }}
             onPress={() =>
                 router.push({

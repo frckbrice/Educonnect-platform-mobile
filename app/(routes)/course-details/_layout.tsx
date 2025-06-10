@@ -1,4 +1,3 @@
-
 import { StyleSheet, Text, Platform, TouchableOpacity } from "react-native";
 import React from "react";
 import { router, Stack } from "expo-router";
@@ -16,55 +15,61 @@ export default function CourseDetailsLayout() {
 
     return (
         <>
-            <Stack >
-            <Stack.Screen
-                name="index"
-                options={{
-                    headerShown: true,
-                    headerTitle: "",
-                    headerStyle: {
-                        backgroundColor: theme.colors.background,
-                    },
-                    headerShadowVisible: true,
-                    // headerBackVisible: true,
-                    headerTintColor: theme.colors.text,
-                    headerLeft: () => (
-                        <TouchableOpacity
-                            onPress={() => router.back()}
-                            style={[
-                                styles.backButton,
-                                {
-                                    backgroundColor: isDark
-                                        ? 'rgba(255, 255, 255, 0.1)'
-                                        : 'rgba(0, 0, 0, 0.05)',
-                                }
-                            ]}   
-                        >
-                            <AntDesign
-                                name="arrowleft"
-                                size={safeScale(20)}
-                                color={theme.colors.text}
-                                style={styles.backIcon}
-                            />
-                            <Text
+            <Stack>
+                <Stack.Screen
+                    name="index"
+                    options={{
+                        headerShown: true,
+                        headerTitle: Platform.OS === "ios" ? "Course Details" : "",
+                        headerTitleStyle: {
+                            color: theme.colors.text,
+                            fontSize: safeScale(fontSizes.FONT18 || 18),
+                            fontWeight: '600',
+                        },
+                        headerStyle: {
+                            backgroundColor: theme.colors.background,
+
+                        },
+                        headerShadowVisible: true,
+                        headerTintColor: theme.colors.text,
+                        headerLeft: () => (
+                            <TouchableOpacity
+                                onPress={() => router.back()}
                                 style={[
-                                    styles.backText,
+                                    styles.backButton,
                                     {
-                                        color: theme.colors.text,
-                                        fontSize: safeScale(fontSizes.FONT16 || 16),
-                                    },
+                                        backgroundColor: isDark
+                                            ? 'rgba(255, 255, 255, 0.1)'
+                                            : 'rgba(0, 0, 0, 0.05)',
+                                    }
                                 ]}
+                                activeOpacity={0.7}
                             >
-                                Back
-                            </Text>
-                        </TouchableOpacity>
-                    ),
+                                <AntDesign
+                                    name="arrowleft"
+                                    size={safeScale(20)}
+                                    color={theme.colors.text}
+                                    style={styles.backIcon}
+                                />
+                                <Text
+                                    style={[
+                                        styles.backText,
+                                        {
+                                            color: theme.colors.text,
+                                            fontSize: safeScale(fontSizes.FONT16 || 16),
+                                        },
+                                    ]}
+                                >
+                                    Back
+                                </Text>
+                            </TouchableOpacity>
+                        ),
                     }}
                 />
-        </Stack>
+            </Stack>
             <StatusBar
-                style={theme.dark ? 'light' : 'dark'} // iOS only
-                backgroundColor={theme.dark ? '#000000' : '#ffffff'} // Android only
+                style={isDark ? 'light' : 'dark'} // iOS only
+                backgroundColor={theme.colors.background} // Android only
             />
         </>
     );
@@ -75,16 +80,19 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
+
         paddingHorizontal: 12,
         paddingVertical: 4,
         borderRadius: 8,
-        marginLeft: Platform.OS === 'ios' ? 0 : 4,
-        minHeight: 24,
-        marginTop: 26,
+        marginLeft: Platform.OS === 'ios' ? -8 : 0,
+        marginTop: Platform.OS === 'ios' ? 4 : 22,
         marginBottom: 4,
+        marginRight: Platform.OS !== 'ios' ? 20 : 0,
+        minHeight: 36,
+        // Removed marginTop and marginBottom that were causing misalignment
     },
     backIcon: {
-        marginRight: 6,
+        marginRight: 8,
     },
     backText: {
         fontWeight: '500',

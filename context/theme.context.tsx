@@ -64,7 +64,7 @@ type ThemeColors = {
   text: string;
 };
 
-type AppTheme = {
+export type AppTheme = {
   dark: boolean;
   colors: ThemeColors;
 };

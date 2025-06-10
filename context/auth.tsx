@@ -137,12 +137,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                         console.error(`\n\n Failed to refresh token on startup`)
                     }
                 }
+
             } else {
                 // in the native: we try to use the stored token first
                 const accessToken = await tokenCache?.getToken(AUTH_TOKEN_NAME);
                 const refreshToken = await tokenCache?.getToken(REFRESH_TOKEN_NAME);
 
-                // console.log({ token: accessToken })
+                // console.log({ token: accessToken });
                 if (accessToken) {
                     // console.log("in restore session, accessToken", accessToken)
                     try {

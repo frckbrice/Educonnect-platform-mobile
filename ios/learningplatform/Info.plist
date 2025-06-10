@@ -28,7 +28,7 @@
         <key>CFBundleURLSchemes</key>
         <array>
           <string>educonnected</string>
-          <string>com.bricefrck.learning-platform</string>
+          <string>com.bricefrck.learningplatform.dev</string>
         </array>
       </dict>
       <dict>

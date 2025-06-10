@@ -39,7 +39,7 @@ function RootLayout() {
         <Stack screenOptions={{ headerShown: false }}>
             {/* <Stack.Screen name="(routes)/*" /> */}
             <Stack.Screen name="(tabs)" />
-          {/* <Stack.Screen name="(routes)/notification" /> */}
+            <Stack.Screen name="(routes)/course-details" />
           <Stack.Screen name="index" />
         </Stack>
         {/* </NotificationProvider> */}

@@ -30,8 +30,6 @@ import {
 import * as SecureStore from "expo-secure-store";
 import { router } from "expo-router";
 import * as WebBrowser from "expo-web-browser";
-import { useAuth } from "@/context/auth";
-import { AuthUSer } from "@/components/auth/type";
 import useUser, { useUserData } from "@/hooks/use-user";
 import { UserType } from "@/config/global";
 
@@ -40,6 +38,7 @@ export default function ProfileScreen() {
     const { apiUser, loader } = useUser();
     const { name, email, avatar } = useUserData() as UserType;
 
+    console.log({ apiUser })
 
     const logoutHandler = async () => {
         await SecureStore.deleteItemAsync("accessToken");
