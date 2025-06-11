@@ -195,11 +195,11 @@ export const CourseData: any = [
     content: [
       {
         id: "683d77d4a1b65694b0cfd34a",
-        "description": "Learn the basics of data science, including data collection and preprocessing.",
-        "title": "Introduction to Data Science",
-        "videoLength": "12:00",
-        "videoSection": "https://www.youtube.com/watch?v=0sfVmH5_nj4",
-        "videoUrl": "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+        description: "Learn the basics of data science, including data collection and preprocessing.",
+        title: "Introduction to Data Science",
+        videoLength: "12:00",
+        videoSection: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+        videoUrl: "https://www.youtube.com/watch?v=0sfVmH5_nj4",
         videoPlayer: "Vimeo",
         courseId: "683d77d4a1b65694b0cfd348",
         links: [
@@ -220,11 +220,11 @@ export const CourseData: any = [
 
       {
         id: "683d77d4a1b65694b0cfd349",
-        "description": "Understand various machine learning algorithms and their applications.",
-        "title": "Machine Learning Algorithms",
+        "description": "Explore SEO, social media marketing, and campaign analytics tailored f…",
+        "title": "Digital Marketing Strategy for Startups",
         "videoLength": "20:00",
         "videoSection": "https://www.youtube.com/watch?v=0sfVmH5_nj4",
-        "videoUrl": "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+        "videoUrl": "https://www.youtube.com/watch?v=nkK1bT8ls0M",
         videoPlayer: "YouTube",
         courseId: "683d77d4a1b65694b0cfd348",
         links: [
@@ -253,8 +253,8 @@ export const CourseData: any = [
         "description": "Learn how to visualize data using libraries like Matplotlib and Seaborn.",
         "title": "Data Visualization",
         "videoLength": "18:00",
-        "videoSection": "https://www.youtube.com/watch?v=0sfVmH5_nj4",
-        "videoUrl": "https://www.youtube.com/watch?v=0sfVmH5_nj4",
+        "videoSection": "https://www.youtube.com/watch?v=SSo_EIwHSd4",
+        "videoUrl": "https://www.youtube.com/watch?v=SSo_EIwHSd4",
         videoPlayer: "YouTube",
         courseId: "683d77d4a1b65694b0cfd348",
         links: [

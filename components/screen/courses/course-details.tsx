@@ -899,7 +899,7 @@ export default function CourseDetailsScreen() {
                         styles.content,
                         {
                             opacity: fadeAnim,
-                            transform: [{ scaleY: Animated.add(slideAnim, 1) }], // This should work now
+                            transform: [{ translateY: Animated.add(slideAnim ? slideAnim : 0, 1) }], // This should work now
                         }
                     ]}
                 >
@@ -1303,11 +1303,14 @@ const createStyles = (theme: AppTheme) => StyleSheet.create({
         color: theme.dark ? "#fff" : "#000",
     },
     originalPrice: {
-        fontSize: fontSizes.FONT16,
+        fontSize: fontSizes.FONT20,
         fontFamily: "Poppins_400Regular",
-        color: theme.dark ? "#999" : "#666",
+        color: !theme.dark ? "#3E3B54" : "#fff",
         textDecorationLine: "line-through",
         marginBottom: 4,
+        textDecorationStyle: "solid",
+        marginLeft: 20,
+
     },
     statsContainer: {
         alignItems: "flex-end",

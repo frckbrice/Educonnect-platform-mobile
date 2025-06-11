@@ -10,8 +10,9 @@ import {
     KeyboardAvoidingView,
     Platform,
     Alert,
+    ActivityIndicator,
 } from "react-native";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTheme } from "@/context/theme.context";
 import { useGlobalSearchParams } from "expo-router";
 import * as SecureStore from "expo-secure-store";
@@ -40,6 +41,50 @@ import ReviewCard from "@/components/card/review.card";
 import BottomCourseAccess from "./bottom.course.access";
 import { WebView } from "react-native-webview";
 import { API_URL } from "@/utils/env-constant";
+import { extractYouTubeVideoId } from "@/utils/helps-functions";
+
+const VideoPlayer = ({ currentVideo }: { currentVideo: any }) => {
+    const videoId = extractYouTubeVideoId(currentVideo.videoUrl);
+
+    <View style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#f0f0f0',
+        padding: 20
+    }}>
+        <Text style={{ fontSize: 16, color: '#666' }}>Invalid video URL</Text>
+    </View>
+
+    return (
+        <View style={styles.videoContainer}>
+            <WebView
+                source={{
+                    uri: `https://www.youtube.com/embed/${videoId}?rel=0&showinfo=0&controls=1&playsinline=1`,
+                }}
+                style={styles.webView}
+                javaScriptEnabled={true}
+                domStorageEnabled={true}
+                allowsInlineMediaPlayback={true}
+                allowsFullscreenVideo={true}
+                startInLoadingState={true}
+                renderLoading={() => (
+                    <View style={{
+                        flex: 1,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: '#000'
+                    }}>
+                        <ActivityIndicator size="large" color="#fff" />
+                    </View>
+                )}
+                onError={(error) => {
+                    console.log('Video load error:', error.nativeEvent);
+                }}
+            />
+        </View>
+    );
+};
 
 export default function CourseAccess() {
     const { theme } = useTheme();
@@ -132,7 +177,7 @@ export default function CourseAccess() {
         }
     };
 
-    const questionsFetchHandler = async () => {
+    const questionsFetchHandler = useCallback(async () => {
         const currentVideo = courseContents[activeVideo];
         if (!currentVideo?.id) {
             console.error("Current video or video ID is undefined");
@@ -152,9 +197,9 @@ export default function CourseAccess() {
         } finally {
             setQuestionsLoader(false);
         }
-    };
+    }, [activeVideo, courseContents]);
 
-    const handleQuestionSubmit = async () => {
+    const handleQuestionSubmit = useCallback(async () => {
         if (!question.trim()) {
             Alert.alert("Error", "Please enter a question before submitting.");
             return;
@@ -178,9 +223,9 @@ export default function CourseAccess() {
         } finally {
             setIsSubmittingQuestion(false);
         }
-    };
+    }, [question, activeVideo, courseContents]);
 
-    const reviewsFetchHandler = async () => {
+    const reviewsFetchHandler = useCallback(async () => {
         try {
             const response = await axios.get(`${API_URL}/reviews/${params?.id}`);
             setReviews(response.data?.reviewsData || []);
@@ -188,7 +233,7 @@ export default function CourseAccess() {
             console.error("Error fetching reviews:", error);
             setReviews([]);
         }
-    };
+    }, [params?.id, setReviews]);
 
     const renderStars = () => {
         const stars = [];
@@ -282,7 +327,7 @@ export default function CourseAccess() {
                 contentContainerStyle={styles.scrollContent}
             >
                 {/* Video Player Section */}
-                <View style={styles.videoContainer}>
+                {/* <View style={styles.videoContainer}>
                     <WebView
                         source={{
                             uri: `https://www.youtube.com/embed/${currentVideo.videoUrl}`,
@@ -291,13 +336,43 @@ export default function CourseAccess() {
                         javaScriptEnabled={true}
                         domStorageEnabled={true}
                     />
-                </View>
+                </View> */}
+
+                {/* <View style={styles.videoContainer}>
+                    <WebView
+                        source={{
+                            uri: `https://www.youtube.com/embed/${currentVideo.videoUrl}?rel=0&showinfo=0&controls=1&autoplay=0&playsinline=1&modestbranding=1`,
+                        }}
+                        style={styles.webView}
+                        javaScriptEnabled={true}
+                        domStorageEnabled={true}
+                        allowsInlineMediaPlayback={true}
+                        mediaPlaybackRequiresUserAction={false}
+                        allowsFullscreenVideo={true}
+                        startInLoadingState={true}
+                        renderLoading={() => (
+                            <View style={{
+                                flex: 1,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                backgroundColor: '#000'
+                            }}>
+                                <ActivityIndicator size="large" color="#fff" />
+                            </View>
+                        )}
+                        onError={(syntheticEvent) => {
+                            const { nativeEvent } = syntheticEvent;
+                            console.warn('WebView error: ', nativeEvent);
+                        }}
+                    />
+                </View> */}
+                <VideoPlayer currentVideo={currentVideo} />
 
                 {/* Video Info Header */}
                 <View style={styles.videoInfoHeader}>
                     <View style={styles.videoNavigation}>
                         <TouchableOpacity
-                            onPress={handlePrevLesson}
+                            onPress={() => handlePrevLesson()}
                             disabled={activeVideo <= 0}
                             style={[styles.navButton, { opacity: activeVideo <= 0 ? 0.3 : 1 }]}
                         >
