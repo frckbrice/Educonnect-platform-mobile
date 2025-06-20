@@ -6,7 +6,7 @@ export type OnboardingSlideTypes = {
     subTitle: string;
 }
 
-type onBoardingSlidesTypes = {
+export type onBoardingSlidesTypes = {
     color: string;
     image: any;
     title: string;
@@ -14,7 +14,7 @@ type onBoardingSlidesTypes = {
     subTitle: string;
 };
 
-type UserType = {
+export type UserType = {
     id: string;
     name: string;
     email: string;
@@ -36,7 +36,7 @@ type UserType = {
     updatedAt: Date;
 };
 
-type ReviewsType = {
+export type ReviewsType = {
     id: string;
     user: UserType;
     userId: string;
@@ -48,7 +48,7 @@ type ReviewsType = {
     updatedAt: any;
 };
 
-type OrderType = {
+export type OrderType = {
     id: string;
     userId: string;
     payment_info: string | null;
@@ -57,7 +57,7 @@ type OrderType = {
     updatedAt: any;
 };
 
-type AnswerType = {
+export type AnswerType = {
     id: string;
     userId: string;
     questionId: string;
@@ -68,7 +68,7 @@ type AnswerType = {
     updatedAt: Date;
 };
 
-type BenefitsType = {
+export type BenefitsType = {
     id: string;
     title: string;
     courseId: string;
@@ -76,7 +76,7 @@ type BenefitsType = {
     updatedAt: any;
 };
 
-type QuestionType = {
+export type QuestionType = {
     id: string;
     userId: string;
     user: UserType;
@@ -88,19 +88,7 @@ type QuestionType = {
     updatedAt: Date;
 };
 
-type QuestionType = {
-    id: string;
-    userId: string;
-    user: UserType;
-    contentId: string;
-    question: string;
-    image?: string;
-    answers: AnswerType[];
-    createdAt: Date;
-    updatedAt: Date;
-};
-
-type CourseDataType = {
+export type CourseDataType = {
     id: string;
     title: string;
     videoUrl: string;
@@ -114,7 +102,7 @@ type CourseDataType = {
     courseId: string;
 };
 
-type NotificationType = {
+export type NotificationType = {
     id: string;
     title: string;
     message: string;
@@ -127,20 +115,7 @@ type NotificationType = {
     updatedAt: Date;
 };
 
-type TicketReplies = {
-    id: string;
-    ticketId: string;
-    reply: string;
-    user: UserType;
-    replyId: string;
-    createdAt: Date | null;
-    updatedAt: Date | null;
-};
-
-type NotificationStatus = "UNREAD" | "READ" | "ARCHIVED" | "CLOSED";
-
-
-type TicketsTypes = {
+export type TicketsTypes = {
     id: string;
     creatorId: string;
     ticketTitle: string;
@@ -151,7 +126,33 @@ type TicketsTypes = {
     updatedAt: Date;
 };
 
-type CourseType = {
+export type TicketReplies = {
+    id: string;
+    ticketId: string;
+    reply: string;
+    user: UserType;
+    replyId: string;
+    createdAt: Date | null;
+    updatedAt: Date | null;
+};
+
+export enum NotificationStatus {
+    UNREAD = "UNREAD",
+    READ = "READ",
+    ARCHIVED = "ARCHIVED",
+    CLOSED = "CLOSED",
+};
+
+export enum UserRoleType {
+    ADMIN = "ADMIN",
+    USER = "USER",
+    TEACHER = "TEACHER",
+    STUDENT = "STUDENT",
+    PARENT = "PARENT"
+};
+
+
+export type CourseType = {
     id: string;
     name: string;
     description: string;

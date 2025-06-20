@@ -21,6 +21,7 @@ export default function CourseDetailsLayout() {
                     options={{
                         headerShown: true,
                         headerTitle: Platform.OS === "ios" ? "Purshased Course" : "",
+                        headerTitleAlign: "center",
                         headerTitleStyle: {
                             color: theme.colors.text,
                             fontSize: safeScale(fontSizes.FONT18 || 18),

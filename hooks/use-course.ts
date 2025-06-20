@@ -14,9 +14,10 @@ const useGetCourses = () => {
 
         const fetchCourses = async () => {
             try {
-                const response = await axios.get(`${API_URL}/courses`);
+
                 // use to smooth the UX in case of large number of course
-                startTransition(() => {
+                startTransition(async () => {
+                    const response = await axios.get(`${API_URL}/courses`);
                     setCourses(response.data.courses);
                 });
             } catch (error: any) {

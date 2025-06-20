@@ -327,45 +327,7 @@ export default function CourseAccess() {
                 contentContainerStyle={styles.scrollContent}
             >
                 {/* Video Player Section */}
-                {/* <View style={styles.videoContainer}>
-                    <WebView
-                        source={{
-                            uri: `https://www.youtube.com/embed/${currentVideo.videoUrl}`,
-                        }}
-                        style={styles.webView}
-                        javaScriptEnabled={true}
-                        domStorageEnabled={true}
-                    />
-                </View> */}
 
-                {/* <View style={styles.videoContainer}>
-                    <WebView
-                        source={{
-                            uri: `https://www.youtube.com/embed/${currentVideo.videoUrl}?rel=0&showinfo=0&controls=1&autoplay=0&playsinline=1&modestbranding=1`,
-                        }}
-                        style={styles.webView}
-                        javaScriptEnabled={true}
-                        domStorageEnabled={true}
-                        allowsInlineMediaPlayback={true}
-                        mediaPlaybackRequiresUserAction={false}
-                        allowsFullscreenVideo={true}
-                        startInLoadingState={true}
-                        renderLoading={() => (
-                            <View style={{
-                                flex: 1,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                backgroundColor: '#000'
-                            }}>
-                                <ActivityIndicator size="large" color="#fff" />
-                            </View>
-                        )}
-                        onError={(syntheticEvent) => {
-                            const { nativeEvent } = syntheticEvent;
-                            console.warn('WebView error: ', nativeEvent);
-                        }}
-                    />
-                </View> */}
                 <VideoPlayer currentVideo={currentVideo} />
 
                 {/* Video Info Header */}

@@ -1,5 +1,6 @@
 import { useAuth } from "@/context/auth";
 import { AUTH_TOKEN_NAME } from "@/utils/env-constant";
+import { registerForPushNotificationsAsync } from "@/utils/register-for-push-notification";
 import { Redirect, useRouter } from "expo-router";
 import * as SecureStore from 'expo-secure-store';
 import { useEffect, useState } from "react";
@@ -19,6 +20,8 @@ export default function Index() {
         setLoggedInUser(token ? true : false);
       }
     )();
+
+
     // signOut();
     console.log("checking if user is logged in: ", loggedInUser);
   },[]);

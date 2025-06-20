@@ -1,8 +1,8 @@
 import { ConfigContext, ExpoConfig } from "expo/config";
 import 'dotenv/config';
 
-
 const EAS_PROJECT_ID = process.env.EXPO_PUBLIC_EAS_PROJECT_ID!;
+const APPLE_TEAM_ID = process.env.EXPO_PUBLIC_APPLE_TEAM_ID;
 
 const PROJECT_SLUG = process.env.EXPO_PUBLIC_PROJECT_SLUG;
 const OWNER = "franckbriceavom";
@@ -17,9 +17,6 @@ const SPLASH_ICON = "./assets/images/splash-icon.png";
 const ADAPTIVE_ICON = "";
 const SHEME = "educonnected"
 const BASE_PROD_URL = process.env.EXPO_PUBLIC_BASE_URL;
-
-
-
 
 
 // the app.config.js used to hide some sensitive information like the api-keys
@@ -43,13 +40,18 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       "config": {
         "usesNonExemptEncryption": false
       },
-      "bundleIdentifier": "com.bricefrck.learningplatform.dev",
+      "bundleIdentifier": "com.bricefrck.learningplatform.stage",
+      "appleTeamId": APPLE_TEAM_ID,
+      entitlements: {
+        'aps-environment': 'development'
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
+      "googleServicesFile": "./google-services.json",
       "package": "com.bricefrck.learningplatform.dev",
     },
     "web": {
@@ -101,7 +103,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
         "origin": false
       },
       "eas": {
-        "projectId": EAS_PROJECT_ID
+        "projectId": EAS_PROJECT_ID,
       }
     }
   }

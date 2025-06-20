@@ -87,16 +87,14 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.bricefrck.learningplatform.dev"
+    namespace 'com.bricefrck.learningplatform.dev'
     defaultConfig {
-        missingDimensionStrategy("store", "play")
+missingDimensionStrategy "store", "play"
         applicationId 'com.bricefrck.learningplatform.dev'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0.0"
-        // Add this to ensure BuildConfig generation
-        buildConfigField("String", "BUILD_TIME", "\"${new Date().toString()}\"")
     }
     signingConfigs {
         debug {
@@ -178,3 +176,5 @@ dependencies {
         implementation jscFlavor
     }
 }
+
+apply plugin: 'com.google.gms.google-services'

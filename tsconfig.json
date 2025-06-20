@@ -3,6 +3,7 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "importHelpers": true,
     "strict": true,
     "baseUrl": "./",
     "paths": {
@@ -20,6 +21,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts"
+    "expo-env.d.ts",
+    "**/*.d.ts"
   ]
 }

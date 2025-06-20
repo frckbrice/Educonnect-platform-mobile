@@ -2,7 +2,7 @@
 
 buildscript {
     ext {
-        buildToolsVersion = findProperty('android.buildToolsVersion') ?: '34.0.0'
+        buildToolsVersion = findProperty('android.buildToolsVersion') ?: '35.0.0'
 minSdkVersion = Integer.parseInt(findProperty('android.minSdkVersion') ?: '24')
         compileSdkVersion = Integer.parseInt(findProperty('android.compileSdkVersion') ?: '35')
         targetSdkVersion = Integer.parseInt(findProperty('android.targetSdkVersion') ?: '35')
@@ -14,7 +14,8 @@ minSdkVersion = Integer.parseInt(findProperty('android.minSdkVersion') ?: '24')
         mavenCentral()
     }
   dependencies {
-    classpath('com.android.tools.build:gradle:8.1.0')  // or a version compatible with your Gradle wrapper
+        classpath 'com.google.gms:google-services:4.4.1'
+    classpath('com.android.tools.build:gradle:8.4.1')  // or a version compatible with your Gradle wrapper
     classpath('com.facebook.react:react-native-gradle-plugin:0.79.3')  // match your React Native version
     classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
 }

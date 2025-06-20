@@ -1,0 +1,40 @@
+# Start by mirroring .gitignore, then override as needed
+
+# Node dependencies
+node_modules/
+
+# Expo / build outputs
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# Debug and generated metadata
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.apk
+*.aab
+*.pem
+.DS_Store
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+.metro-health-check*
+.env*.local
+*.tsbuildinfo
+
+# Project-specific ignores
+app-example
+my-keystore.jks
+build-*.aab
+build-*.apk
+
+# ❗ Don't ignore these files (override .gitignore)
+!android/
+!ios/
+!android/app/google-services.json
+!ios/GoogleService-Info.plist

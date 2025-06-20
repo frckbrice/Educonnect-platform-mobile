@@ -8,6 +8,7 @@
 
 import Constants from 'expo-constants';
 
+
 // Set your IP in .env or app.config.js
 const getApiConfig = () => {
   // Priority: env vars > hostUri > fallback
@@ -40,7 +41,8 @@ const getApiConfig = () => {
 
 const { baseUrl, apiUrl } = getApiConfig();
 
-export const API_URL = `${apiUrl}`;
+// export const API_URL = `${apiUrl}`;
+export const API_URL = "https://4a69-129-0-226-162.ngrok-free.app/api/v1";
 export const BASE_URL = `${baseUrl}`;
 
 console.log("\n\n the API URL", API_URL);
