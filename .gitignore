@@ -1,43 +1,50 @@
-# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
-
-# dependencies
-node_modules/
-ios/
+# Ignore full native directories and sensitive config files from Git
 android/
+ios/
 
-# Expo
-.expo/
-dist/
-web-build/
-expo-env.d.ts
+# Firebase / Google Services files
+google-services.json
+ios/GoogleService-Info.plist
+educonnected-19609-firebase-adminsdk-fbsvc-a4673a83cf.json
 
-# Native
-*.orig.*
+# App builds & secrets
+*.apk
+*.aab
 *.jks
 *.p8
 *.p12
 *.key
 *.mobileprovision
+*.pem
 
-# Metro
+# Local build outputs
+dist/
+web-build/
+build-*.aab
+build-*.apk
+
+# Node dependencies
+node_modules/
+
+# Metro / debug / Expo stuff
+.expo/
 .metro-health-check*
-
-# debug
 npm-debug.*
 yarn-debug.*
 yarn-error.*
+expo-env.d.ts
 
 # macOS
 .DS_Store
-*.pem
 
-# local env files
+# Env
 .env*.local
+.env
 
-# typescript
+# TypeScript
 *.tsbuildinfo
 
+# Other project-specific ignores
 app-example
-
 my-keystore.jks
-
+eas.json

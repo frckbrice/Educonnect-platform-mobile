@@ -1,13 +1,13 @@
-import { TouchableOpacity, ScrollView, StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import { TouchableOpacity, ScrollView, Text, View } from "react-native";
+import React from "react";
 import { useTheme } from "@/context/theme.context";
 import { scale, verticalScale } from "react-native-size-matters";
 import IconSix from "@/assets/svgs/support-center/six";
 import { fontSizes } from "@/utils/app-constant";
 import { AntDesign } from "@expo/vector-icons";
-import { router } from "expo-router";
+import { router } from "expo-router";   
 import useUser from "@/hooks/use-user";
-import { TicketsTypes } from "@/config/global";
+import { NotificationStatus, TicketsTypes } from "../../../config/global";
 
 export default function MyTicketsScreen() {
     const { theme } = useTheme();
@@ -90,23 +90,21 @@ export default function MyTicketsScreen() {
                                 }}
                             >
                                 {item.ticketTitle}
-                                this is something
                             </Text>
                             <Text
                                 style={{
                                     color:
-                                        item.status !== "UNREAD"
+                                        item.status !== NotificationStatus.UNREAD
                                             ? "#19C964"
                                             : theme.dark
                                                 ? "#fff"
                                                 : "#000",
                                     fontSize: fontSizes.FONT22,
-                                    opacity: item?.status === "UNREAD" ? 0.7 : 1,
+                                    opacity: item?.status === NotificationStatus.UNREAD ? 0.7 : 1,
                                     fontFamily: "Poppins_500Medium",
                                 }}
                             >
                                 {item.status}
-                                pending
                             </Text>
                         </TouchableOpacity>
                     ))}

@@ -1,15 +1,5 @@
-import {
-    Pressable,
-    StatusBar,
-    StyleSheet,
-    Text,
-    TextInput,
-    View,
-} from "react-native";
-import React, { useEffect, useState } from "react";
 import { useTheme } from "@/context/theme.context";
-import { useUserData } from "@/hooks/use-user";
-import { LinearGradient } from "expo-linear-gradient";
+import { setAuthorizationHeader, useUserData } from "@/hooks/use-user";
 import {
     fontSizes,
     IsAndroid,
@@ -18,12 +8,21 @@ import {
     windowHeight,
     windowWidth,
 } from "@/utils/app-constant";
-import { moderateScale, scale, verticalScale } from "react-native-size-matters";
-import { EvilIcons, Ionicons } from "@expo/vector-icons";
-import { router } from "expo-router";
-import { setAuthorizationHeader } from "@/hooks/use-user";
-import axios from "axios";
 import { API_URL } from "@/utils/env-constant";
+import { EvilIcons, Ionicons } from "@expo/vector-icons";
+import axios from "axios";
+import { LinearGradient } from "expo-linear-gradient";
+import { router } from "expo-router";
+import React, { useEffect, useState } from "react";
+import {
+    Pressable,
+    StatusBar,
+    StyleSheet,
+    Text,
+    TextInput,
+    View,
+} from "react-native";
+import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 
 export default function WelcomeHeader() {
     const { theme } = useTheme();
@@ -45,7 +44,8 @@ export default function WelcomeHeader() {
     }, []);
 
     return (
-        <LinearGradient
+        <>
+            <LinearGradient
             colors={
                 theme.dark
                     ? ["#3c43485c", "#3c43485c", "#3c43485c"]
@@ -151,6 +151,7 @@ export default function WelcomeHeader() {
                 </Pressable>
             </View>
         </LinearGradient>
+        </>
     );
 }
 

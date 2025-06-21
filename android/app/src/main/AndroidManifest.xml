@@ -26,7 +26,6 @@
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="educonnected"/>
         <data android:scheme="exp+learningplatform"/>
-        <data android:scheme="exp+educonnectecm"/>
       </intent-filter>
     </activity>
   </application>

@@ -1,13 +1,13 @@
-import * as jose from "jose";
 import {
-    JWT_EXPIRATION_TIME,
-    JWT_SECRET,
-    REFRESH_TOKEN_EXPIRY,
     API_URL,
-    JWT_REFRESH_SECRET,
     GITHUB_CLIENT_ID,
     GITHUB_CLIENT_SECRET,
+    JWT_EXPIRATION_TIME,
+    JWT_REFRESH_SECRET,
+    JWT_SECRET,
+    REFRESH_TOKEN_EXPIRY,
 } from "@/utils/env-constant";
+import * as jose from "jose";
 
 const MAX_RETRIES = 3;
 let attempts = 0;
@@ -22,7 +22,7 @@ export async function POST(request: Request) {
     const code = params.get("code") as string;
     // const platform = (params.get("platform") as string) || "native"; // Default to native if not specified
 
-
+    console.log("\n\n  received code: ", code);
     if (!code) {
         return Response.json(
             { error: "Missing authorization code" },
@@ -56,6 +56,12 @@ export async function POST(request: Request) {
     // persist the data to the database with retry in case of failure
     try {
         await persistData(userInfo, access_token);
+        const { accessToken, refreshToken } = await createTokens("", userInfo);
+
+        return Response.json({
+            accessToken,
+            refreshToken,
+        });
     } catch (error) {
         // prevent to sent back tokens while the user data are not persisted to database
         return Response.json({
@@ -64,12 +70,7 @@ export async function POST(request: Request) {
             refreshToken: null
         }, { status: 500 })
     }
-    const { accessToken, refreshToken } = await createTokens("", userInfo);
 
-    return Response.json({
-        accessToken,
-        refreshToken,
-    });
 }
 
 

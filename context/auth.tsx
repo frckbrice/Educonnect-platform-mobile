@@ -1,23 +1,23 @@
 
 // libraries imports
-import React from 'react';
-import * as WebBrowser from 'expo-web-browser';
 import { AuthUSer } from '@/components/auth/type';
 import {
     AuthError,
     AuthRequestConfig,
     DiscoveryDocument,
-    exchangeCodeAsync,
     makeRedirectUri,
     useAuthRequest
 } from 'expo-auth-session';
-import { Platform } from 'react-native';
+import * as WebBrowser from 'expo-web-browser';
 import * as jose from 'jose';
+import React from 'react';
+import { Platform } from 'react-native';
 
 // local imports
-import { APP_SCHEME, AUTH_TOKEN_NAME, BASE_URL, GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, REFRESH_TOKEN_NAME } from '@/utils/env-constant';
-import { useRouter } from 'expo-router';
 import { tokenCache } from '@/utils/cache';
+import { APP_SCHEME, AUTH_TOKEN_NAME, BASE_URL, GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, REFRESH_TOKEN_NAME } from '@/utils/env-constant';
+import { useRouter, } from 'expo-router';
+
 
 WebBrowser.maybeCompleteAuthSession(); //In order to close the popup window on web,
 
@@ -66,6 +66,7 @@ const githubConfig: AuthRequestConfig = {
     scopes: ["identity"],
     redirectUri: makeRedirectUri({
         scheme: APP_SCHEME,
+        path: 'redirect' // just added
     }),
 };
 // set the github discovery document
@@ -95,6 +96,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     // set refresh variable to avoid multiple refresh token at the same time
     const refreshInProgressRef = React.useRef(false);
+    const isMounted = React.useRef(true);
+
+    React.useEffect(() => {
+        isMounted.current = true;
+        return () => {
+            isMounted.current = false;
+        };
+    }, []);
 
     React.useEffect(() => {
         // this function is called when the user hit to continue on Oauth
@@ -112,7 +121,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
             if (isWeb) {
                 // For Web: Check if we have a session cookie by making a request to a session endpoint.
-                const sessionResponse = await fetch(`${BASE_URL}/api/auth/session`, {
+                const sessionResponse = await fetch(`http://localhost:8081/api/auth/session`, {
                     method: 'GET',
                     credentials: 'include'
                 });
@@ -129,12 +138,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                         console.error(`\n\n Failed to refresh token on startup`)
                     }
                 }
+
             } else {
                 // in the native: we try to use the stored token first
                 const accessToken = await tokenCache?.getToken(AUTH_TOKEN_NAME);
                 const refreshToken = await tokenCache?.getToken(REFRESH_TOKEN_NAME);
 
-
+                console.log({ token: accessToken });
                 if (accessToken) {
                     // console.log("in restore session, accessToken", accessToken)
                     try {
@@ -153,8 +163,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                                 setRefreshToken(refreshToken);
 
                             setUser(decoded as AuthUSer);
-                            router.push('/(tabs)'); // redirect to the home page
-
+                            setTimeout(() => {
+                                if (isMounted.current) {
+                                    router.push('/(tabs)');
+                                }
+                            }, 100);
                         } else if (refreshToken) {
                             // log them to check
                             console.log("in restore session, refreshToken", refreshToken ? 'exists' : 'does not exist')
@@ -215,7 +228,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
             if (isWeb) {
                 // for web: use the json for the request
-                const refreshResponse = await fetch(`${BASE_URL}/api/auth/refresh`, {
+                const refreshResponse = await fetch(`http://localhost:8081/api/auth/refresh`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -236,7 +249,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 }
 
                 // get the most up-to-date user from the session
-                const sessionData = await fetch(`${BASE_URL}/api/auth/session`, {
+                const sessionData = await fetch("http://localhost:8081/api/auth/session", {
                     method: 'GET',
                     credentials: 'include'
                 });
@@ -257,7 +270,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
                 console.log('\n\n Using Refresh token to get the new token');
                 try {
-                    const refreshResponse = await fetch(`${BASE_URL}/api/auth/refresh`, {
+                    const refreshResponse = await fetch("http://localhost:8081/api/auth/refresh", {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -353,7 +366,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 // The server will exchange this code with Google for access and refresh tokens
                 // For web: credentials are included to handle cookies
                 // For native: we'll receive the tokens directly in the response
-                const tokenResponse = await fetch(`${BASE_URL}/api/auth/token`, {
+                const tokenResponse = await fetch(`http://localhost:8081/api/auth/token`, {
                     method: "POST",
                     headers: { "Content-Type": "application/x-www-form-urlencoded" },
                     body: formData.toString(),
@@ -372,7 +385,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                         // Fetch the session to get user data
                         // This ensures we have the most up-to-date user information
                         const sessionResponse = await fetch(
-                            `${BASE_URL}/api/auth/session`,
+                            `http://localhost:8081/api/auth/session`,
                             {
                                 method: "GET",
                                 credentials: "include", // Include cookies in the request to get the session
@@ -432,7 +445,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
                 let tokenResponse;
                 try {
-                    tokenResponse = await fetch(`${BASE_URL}/api/github/token`, {
+                    // tokenResponse = await fetch(`${BASE_URL}/api/github/token`, {
+                    tokenResponse = await fetch(`http://localhost:8081/api/github/token`, {
                         method: "POST",
                         headers: { "Content-Type": "application/x-www-form-urlencoded" },
                         body: formData.toString(),
@@ -446,13 +460,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                     console.error("error from github token response", error);
                 }
 
-
                 if (isWeb) {
                     const userData = await tokenResponse?.json();
 
                     if (userData.success) {
                         const sessionResponse = await fetch(
-                            `${BASE_URL}/api/auth/session`,
+                            `http://localhost:8081/api/auth/session`,
                             {
                                 method: "GET",
                                 credentials: "include", // Include cookies in the request to get the session
@@ -517,7 +530,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             setRefreshToken(newRefreshToken);
             await tokenCache?.saveToken(REFRESH_TOKEN_NAME, newRefreshToken)
         }
-        router.push('/(tabs)'); // redirect to the home page
+        setTimeout(() => {
+            if (isMounted.current) {
+                router.push('/(tabs)');
+            }
+        }, 100);// redirect to the home page
     }
 
     const fetchWithAuth = async (url: string, options: RequestInit) => {
@@ -629,7 +646,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         if (isWeb) {
             // for web: we need to call the logout end point to clear all cookies 
             try {
-                await fetch(`${BASE_URL}/api/auth/logout`, {
+                await fetch(`http://localhost:8081/api/auth/logout`, {
                     method: 'POST',
                     credentials: 'include'
                 });

@@ -71,7 +71,7 @@ export default function CourseDetailsTabs({
                 <Text
                     style={{
                         color:
-                            activeButton === "About" ? "#fff" : theme.dark ? "#ffff" : "#000",
+                            activeButton === "About" ? "#fff" : theme.dark ? "#fff" : "#000",
                         fontFamily: "Poppins_500Medium",
                         fontSize: fontSizes.FONT20,
                     }}

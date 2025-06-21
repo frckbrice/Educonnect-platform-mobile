@@ -39,7 +39,7 @@ export default function SupportCenterScreen() {
     const supportChatHanlder = () => {
         setOpen(true);
         const isHasOpenTicket = apiUser?.tickets?.find(
-            (i: TicketsTypes) => i.status !== "CLOSED"
+            (tiket: TicketsTypes) => tiket.status !== "CLOSED"
         );
         if (isHasOpenTicket) {
             router.push({
@@ -49,6 +49,7 @@ export default function SupportCenterScreen() {
         }
     };
 
+    // if there is no tiket, create a new one.
     const ticketCreateHandler = async () => {
         if (ticketTitle !== "" || ticketDescription !== "") {
             setLoader(true);
@@ -61,13 +62,15 @@ export default function SupportCenterScreen() {
                 .then((res) => {
                     setTicketTitle("");
                     setTicketDescription("");
-                    setOpen(false);
+                    setOpen(false);         
                     refetch();
                     router.push({ // after the ticket is created we move to chat page.
                         pathname: "/(routes)/support-chat",
                         params: { ticket: JSON.stringify(res.data.ticket) },
                     });
                 });
+        } else {
+            return console.warn(` no title or description found `);
         }
     };
 
@@ -379,7 +382,7 @@ export default function SupportCenterScreen() {
                                                 fontFamily: "Poppins_600SemiBold",
                                             }}
                                         >
-                                            Create
+                                                Create tiket
                                         </Text>
                                     )}
                                 </TouchableOpacity>

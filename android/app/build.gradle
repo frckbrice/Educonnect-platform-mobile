@@ -87,10 +87,10 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.bricefrck.learning_platform'
+    namespace 'com.bricefrck.learningplatform.dev'
     defaultConfig {
 missingDimensionStrategy "store", "play"
-        applicationId 'com.bricefrck.learning_platform'
+        applicationId 'com.bricefrck.learningplatform.dev'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -176,3 +176,5 @@ dependencies {
         implementation jscFlavor
     }
 }
+
+apply plugin: 'com.google.gms.google-services'

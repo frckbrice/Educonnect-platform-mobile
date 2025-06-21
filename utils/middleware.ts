@@ -7,7 +7,8 @@ import { AuthUSer } from "@/components/auth/type";
  * Middleware to authenticate API requests using JWT from Authorization header or cookies
  * @param handler The API route handler to be protected
  *
- * Note for devs: Technically, it's not a middleware in the traditional sense. This function acts as a higher-order function that adds authentication to API route handlers.
+ * Note for devs: Technically, it's not a middleware in the traditional sense. 
+ * This function acts as a higher-order function that adds authentication to API route handlers.
  */
 export function withAuth<T extends Response>(
     handler: (req: Request, user: AuthUSer) => Promise<T>

@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react";
-import { ActivityIndicator, Text, View } from "react-native";
-import * as SecureStore from 'expo-secure-store';
-import { Redirect } from "expo-router";
 import { useAuth } from "@/context/auth";
 import { AUTH_TOKEN_NAME } from "@/utils/env-constant";
+import { registerForPushNotificationsAsync } from "@/utils/register-for-push-notification";
+import { Redirect, useRouter } from "expo-router";
+import * as SecureStore from 'expo-secure-store';
+import { useEffect, useState } from "react";
+import { ActivityIndicator } from "react-native";
 
 
 export default function Index() {
   const [loggedInUser, setLoggedInUser] = useState(false);
   const [loading, setLoading] = useState(true);
   const { isLoading, signOut } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
     (
@@ -18,7 +20,10 @@ export default function Index() {
         setLoggedInUser(token ? true : false);
       }
     )();
+
+
     // signOut();
+    console.log("checking if user is logged in: ", loggedInUser);
   },[]);
 
   return (

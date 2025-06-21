@@ -1,11 +1,12 @@
 import React from 'react'
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import CourseAccess from '@/components/screen/courses/course-access';
 
-type Props = {}
 
-function CourseAccess({ }: Props) {
+export default function CourseDetailsScreen() {
     return (
-        <div>course access index</div>
+        <GestureHandlerRootView>
+            <CourseAccess />
+        </GestureHandlerRootView>
     )
 }
-
-export default CourseAccess;
