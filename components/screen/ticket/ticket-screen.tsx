@@ -5,7 +5,7 @@ import { scale, verticalScale } from "react-native-size-matters";
 import IconSix from "@/assets/svgs/support-center/six";
 import { fontSizes } from "@/utils/app-constant";
 import { AntDesign } from "@expo/vector-icons";
-import { router } from "expo-router";
+import { router } from "expo-router";   
 import useUser from "@/hooks/use-user";
 import { NotificationStatus, TicketsTypes } from "../../../config/global";
 
