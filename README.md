@@ -1,4 +1,6 @@
+
 # EduConnected Mobile Platform 🚀
+
 
 A comprehensive cross-platform mobile learning management system built with React Native and Expo, designed to provide an exceptional educational experience for both learners and educators.
 
@@ -18,6 +20,7 @@ Browse through our comprehensive course catalog and dive into interactive learni
 
 ![Popular Courses](public/sim_3.png)
 *Popular Courses - Comprehensive project-based learning with real-world applications*
+
 
 
 <!-- ### 🔐 Authentication & User Management
@@ -340,3 +343,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
   <p><strong>Empowering education through technology</strong></p>
   <p>Built with ❤️ by the EduConnected Team</p>
 </div>
+
