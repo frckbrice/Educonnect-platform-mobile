@@ -20,13 +20,13 @@ const createTokenCache = (): {
       try {
         const item = await SecureStore.getItemAsync(key);
         if (item) {
-          console.log(`${key} was used 🔐 \n`);
+          // Cache hit - key was used
         } else {
-          console.log("No values stored under key: " + key);
+          // Cache miss - no values stored under key
         }
         return item;
       } catch (error) {
-        console.error("secure store get item error: ", error);
+        // Secure store get item error occurred
         await SecureStore.deleteItemAsync(key);
         return null;
       }

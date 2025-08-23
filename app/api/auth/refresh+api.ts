@@ -39,7 +39,7 @@ export async function POST(request: Request) {
                     refreshToken = jsonBody.refreshToken;
                 }
             } catch (e) {
-                console.log("Failed to parse JSON body, using default platform");
+                // Failed to parse JSON body, using default platform
             }
         }
         else if (
@@ -65,7 +65,7 @@ export async function POST(request: Request) {
                     refreshToken = params.get("refreshToken") as string;
                 }
             } catch (e) {
-                console.log("Failed to parse form data, using default platform");
+                // Failed to parse form data, using default platform
             }
         }
         //  else if (contentType.includes("multipart/form-data")) {
@@ -84,14 +84,14 @@ export async function POST(request: Request) {
                 const url = new URL(request.url);
                 platform = url.searchParams.get("platform") || "native";
             } catch (e) {
-                console.log("Failed to parse URL parameters, using default platform");
+                // Failed to parse URL parameters, using default platform
             }
         }
 
         // For web clients, get refresh token from cookies
         if (platform === "web" && !refreshToken) {
 
-            console.log("\n\n Using web platform with cookies for refresh token");
+            // Using web platform with cookies for refresh token
             const cookieHeader = request.headers.get("cookie");
             if (cookieHeader) {
                 // Parse cookies
@@ -109,7 +109,7 @@ export async function POST(request: Request) {
         // If no refresh token found, try to use the access token as fallback
         if (!refreshToken) {
 
-            console.log("\n\n No refresh token found, trying to use access token as fallback");
+            // No refresh token found, trying to use access token as fallback
             // For native clients, get access token from Authorization header
             const authHeader = request.headers.get("authorization");
             if (authHeader && authHeader.startsWith("Bearer ")) {

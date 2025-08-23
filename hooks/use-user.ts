@@ -32,7 +32,7 @@ export default function useUser() {
 
             setApiUser(response.data.data);
         } catch (error) {
-            console.error("Error fetching user data:", error);
+            // Error fetching user data
         } finally {
             setLoader(false);
         }

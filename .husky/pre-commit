@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔍 Running pre-commit checks..."
+
+# Check for console.log statements
+echo "🔍 Checking for console.log statements..."
+node scripts/check-console-logs.js
+
+# Run lint-staged
+npx lint-staged
+
+echo "✅ Pre-commit checks completed!"

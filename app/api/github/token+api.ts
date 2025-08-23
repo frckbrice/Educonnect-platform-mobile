@@ -16,13 +16,13 @@ let success = false;
 
 export async function POST(request: Request) {
 
-    console.log("welcome to github oauth token reponse handler")
+    // GitHub OAuth token response handler
     const body = await request.text();  // because the body is url encoded and not json 
     const params = new URLSearchParams(body);
     const code = params.get("code") as string;
     // const platform = (params.get("platform") as string) || "native"; // Default to native if not specified
 
-    console.log("\n\n  received code: ", code);
+    // Authorization code received
     if (!code) {
         return Response.json(
             { error: "Missing authorization code" },
@@ -30,9 +30,9 @@ export async function POST(request: Request) {
         );
     }
 
-    console.log("\n\n from github token, received code: ", code);
+    // Processing GitHub authorization code
     const access_token = await fetchGithubAccessToken(code);
-    console.log("github access_token", access_token);
+    // GitHub access token retrieved
 
     if (!access_token) return Response.json({
         error: "Failed to fetch access token",
@@ -42,7 +42,7 @@ export async function POST(request: Request) {
 
 
     const userInfo = await fetchUserInfo(access_token);
-    console.log("github userInfo", userInfo);
+    // GitHub user info retrieved
 
 
     if (!userInfo) {
@@ -52,7 +52,7 @@ export async function POST(request: Request) {
         );
     }
 
-    console.log("persisting user data to database");
+    // Persisting user data to database
     // persist the data to the database with retry in case of failure
     try {
         await persistData(userInfo, access_token);
@@ -139,7 +139,7 @@ async function persistDataToDatabase(userData: object, accessToken: string) {
             console.error('Response not OK:', res.status, text);
         } else {
             const data = await res.json();
-            console.log('response data from api server', data);
+            // Response data received from API server
 
             if (!data.success) {
                 return Response.json(

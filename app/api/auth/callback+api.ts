@@ -7,7 +7,7 @@ export async function GET(request: Request) {
     const incomingParams = new URLSearchParams(request.url.split("?")[1]);
     const combinedPlatformAndState = incomingParams.get("state");
 
-    console.log("combinedPlatformAndState", combinedPlatformAndState);
+    // Platform and state combined
 
     if (!combinedPlatformAndState) {
         return Response.json({ error: "Invalid state" }, { status: 400 });

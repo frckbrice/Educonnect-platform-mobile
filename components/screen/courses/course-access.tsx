@@ -79,7 +79,7 @@ const VideoPlayer = ({ currentVideo }: { currentVideo: any }) => {
                     </View>
                 )}
                 onError={(error) => {
-                    console.log('Video load error:', error.nativeEvent);
+                    // Video load error occurred
                 }}
             />
         </View>

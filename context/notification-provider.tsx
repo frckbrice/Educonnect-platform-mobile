@@ -76,7 +76,7 @@ export const NotificationProvider = ({
 
         notificationListener.current =
             Notifications.addNotificationReceivedListener((notification) => {
-                console.log("\n\n Notification received while the app is running:", notification);
+                // Notification received while the app is running
                 setNotification(notification); // here we get the notification directly
             });
 
@@ -84,7 +84,7 @@ export const NotificationProvider = ({
         notificationListener.current =
             // we get this data from the data sent in the backend on in the reply route.
             Notifications.addNotificationResponseReceivedListener((response) => {
-                console.log("\n\n Notification response : user interact with the notification (tap on it):",
+                // Notification response: user interacted with the notification (tap on it)
                     JSON.stringify(response, null, 2));
                 if (response.notification.request.content.data.courseData) {
                     router.push({

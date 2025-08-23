@@ -65,7 +65,7 @@ const githubConfig: AuthRequestConfig = {
     clientSecret: GITHUB_CLIENT_SECRET!,
     scopes: ["identity"],
     redirectUri: makeRedirectUri({
-        scheme: APP_SCHEME,
+        scheme: APP_SCHEME || 'educonnected',
         path: 'redirect' // just added
     }),
 };
@@ -130,7 +130,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                     const userData = await sessionResponse.json();
                     setUser(userData as AuthUSer);
                 } else {
-                    console.log('No active web session found');
+                    // No active web session found
                     // if no session user, we are trying to refresh the cookie
                     try {
                         await refreshAccessToken();
@@ -144,7 +144,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 const accessToken = await tokenCache?.getToken(AUTH_TOKEN_NAME);
                 const refreshToken = await tokenCache?.getToken(REFRESH_TOKEN_NAME);
 
-                console.log({ token: accessToken });
+                // Token retrieved successfully
                 if (accessToken) {
                     // console.log("in restore session, accessToken", accessToken)
                     try {
@@ -154,7 +154,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                         const now = Math.floor(Date.now() / 1000);
 
                         if (exp && exp > now) {
-                            console.log("in restore session, token still valid")
+                            // Token is still valid
 
                             // the access token is still valid
                             setAccessToken(accessToken);
@@ -170,7 +170,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                             }, 100);
                         } else if (refreshToken) {
                             // log them to check
-                            console.log("in restore session, refreshToken", refreshToken ? 'exists' : 'does not exist')
+                            // Refresh token status checked
 
                             // token expired but still have the refresh token
                             console.warn('\n token expired but remain the refresh token');
@@ -221,7 +221,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
         try {
 
-            console.log('\n\n Attempting to refresh the token');
+            // Attempting to refresh the token
 
             // use the provided token or fall back to the state
             const currentRefreshToken = tokenToUse || refreshToken;
@@ -268,7 +268,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                     return null;
                 }
 
-                console.log('\n\n Using Refresh token to get the new token');
+                // Using Refresh token to get the new token
                 try {
                     const refreshResponse = await fetch("http://localhost:8081/api/auth/refresh", {
                         method: 'POST',
@@ -296,7 +296,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                     if (tokens.accessToken) {
 
                         const decoded = jose.decodeJwt(tokens.accessToken!);
-                        console.log("inside refresh token: ", { decodedUSer: decoded });
+                        // Inside refresh token processing
 
                         // check if we have all required user fields
                         const hasRequiredUserField = decoded &&
@@ -347,7 +347,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 // The platform info helps our server handle web vs native differently
                 // const formData = new FormData();
                 const formData = new URLSearchParams(); // we prefer to use URLSearchParams for native and web compatibility
-                formData.append("code", code);
+                formData.append("code", code || '');
 
                 // Add platform information for the backend to handle appropriately
                 if (isWeb) {
@@ -394,7 +394,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
                         if (sessionResponse.ok) {
                             const sessionData = await sessionResponse.json();
-                            console.log("from session response: userData", sessionData);
+                            // User data received from session response
                             hasAlreadyAuthenticateRef.current = true;
                             setUser(sessionData as AuthUSer);
                         }
@@ -403,7 +403,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                     // For native: The server returns both tokens in the response
                     // We need to store these tokens securely and decode the user data
                     const tokens = await tokenResponse.json();
-                    console.log("from token response: tokens", tokens);
+                    // Tokens received from token response
                     hasAlreadyAuthenticateRef.current = true;
                     await handleNativeTokens(tokens);
                 }
@@ -431,7 +431,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
                 // we prefer to use URLSearchParams for native and web compatibility
                 const formData = new URLSearchParams();
-                formData.append("code", code);
+                formData.append("code", code || '');
 
                 if (isWeb) {
                     formData.append("platform", "web");
