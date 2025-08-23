@@ -1,50 +1,248 @@
-# Ignore full native directories and sensitive config files from Git
-android/
-ios/
+# OSX
+#
+.DS_Store
 
-# Firebase / Google Services files
-google-services.json
-ios/GoogleService-Info.plist
-educonnected-19609-firebase-adminsdk-fbsvc-a4673a83cf.json
+# Xcode
+#
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+project.xcworkspace
 
-# App builds & secrets
-*.apk
-*.aab
+# Android/IntelliJ
+#
+build/
+.idea
+.gradle
+local.properties
+*.iml
+*.hprof
+.cxx/
+*.keystore
+!debug.keystore
+
+# node.js
+#
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# BUCK
+buck-out/
+\.buckd/
+*.keystore
+!debug.keystore
+
+# fastlane
+#
+# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
+# screenshots whenever they are needed.
+# For more information about the recommended setup visit:
+# https://docs.fastlane.tools/best-practices/source-control/
+
+*/fastlane/report.xml
+*/fastlane/Preview.html
+*/fastlane/screenshots
+
+# Bundle artifacts
+*.jsbundle
+
+# CocoaPods
+/ios/Pods/
+
+# Expo
+.expo/
+dist/
+web-build/
+
+# Native
+*.orig.*
 *.jks
 *.p8
 *.p12
 *.key
+*.apk
+*.aab
 *.mobileprovision
-*.pem
 
-# Local build outputs
-dist/
-web-build/
-build-*.aab
-build-*.apk
-
-# Node dependencies
-node_modules/
-
-# Metro / debug / Expo stuff
-.expo/
+# Metro
 .metro-health-check*
+
+# Debug
 npm-debug.*
 yarn-debug.*
 yarn-error.*
-expo-env.d.ts
 
 # macOS
 .DS_Store
+*.pem
 
-# Env
+# local env files
 .env*.local
 .env
 
-# TypeScript
+# typescript
 *.tsbuildinfo
 
-# Other project-specific ignores
-app-example
-my-keystore.jks
-eas.json
+# Testing
+coverage/
+.nyc_output/
+
+# Storybook
+storybook-static/
+
+# Public images - track the structure but ignore large binary files
+!public/images/**/*.png
+public/images/**/*.jpg
+public/images/**/*.jpeg
+public/images/**/*.gif
+public/images/**/*.svg
+public/images/**/*.webp
+public/images/**/*.heic
+public/images/**/*.heif
+
+# Build outputs
+build/
+dist/
+*.aab
+*.apk
+
+# Logs
+logs/
+*.log
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# Next.js build output
+.next
+
+# Nuxt.js build / generate output
+.nuxt
+dist
+
+# Gatsby files
+.cache/
+public
+
+# Storybook build outputs
+.out
+.storybook-out
+
+# Temporary folders
+tmp/
+temp/
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+
+# Build artifacts
+*.aab
+*.apk
+build-*.aab
+build-*.apk
+
+# EAS
+.eas/
+
+# Flipper
+ios/Pods/Flipper*
+ios/Pods/boost-for-react-native
+ios/Pods/FBReactNativeSpec
+ios/Pods/RCT-Folly
+ios/Pods/RCTRequired
+ios/Pods/RCTTypeSafety
+ios/Pods/React-Core
+ios/Pods/React-CoreModules
+ios/Pods/React-RCTActionSheet
+ios/Pods/React-RCTAnimation
+ios/Pods/React-RCTBlob
+ios/Pods/React-RCTImage
+ios/Pods/React-RCTLinking
+ios/Pods/React-RCTNetwork
+ios/Pods/React-RCTSettings
+ios/Pods/React-RCTText
+ios/Pods/React-RCTWebSocket
+ios/Pods/React-cxxreact
+ios/Pods/React-jsi
+ios/Pods/React-jsiexecutor
+ios/Pods/React-jsinspector
+ios/Pods/React-logger
+ios/Pods/React-perflogger
+ios/Pods/React-RCTBlob
+ios/Pods/React-RCTImage
+ios/Pods/React-RCTLinking
+ios/Pods/React-RCTNetwork
+ios/Pods/React-RCTSettings
+ios/Pods/React-RCTText
+ios/Pods/React-RCTWebSocket
+ios/Pods/React-cxxreact
+ios/Pods/React-jsi
+ios/Pods/React-jsiexecutor
+ios/Pods/React-jsinspector
+ios/Pods/React-logger
+ios/Pods/React-perflogger
+
+educonnected-19609-firebase-adminsdk-fbsvc-a4673a83cf.json
+google-services.json
+__tests__/__mocks__/

@@ -146,7 +146,7 @@ async function persistDataToDatabase(userData: object, accessToken: string) {
             console.error('Response not OK:', res.status, text);
         } else {
             const data = await res.json();
-            console.log('tokens', data);
+            // Tokens received from API server
 
             if (!data.success) {
                 return Response.json(
@@ -257,14 +257,13 @@ export async function POST(request: Request) {
             } ${REFRESH_COOKIE_OPTIONS.secure ? "Secure;" : ""} SameSite=${REFRESH_COOKIE_OPTIONS.sameSite
             }`
         );
-        console.log("Access token set in cookie:");
+        // Access token set in cookie
 
         return response;
     }
 
     // persist the data to the database with retry in case of failure
-    console.log("persisting user data to database");
-    // persist the data to the database with retry in case of failure
+    // Persisting user data to database
     try {
         await persistData(userInfo, accessToken);
     } catch (error) {

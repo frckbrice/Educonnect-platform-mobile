@@ -38,7 +38,7 @@ export default function ProfileScreen() {
     const { apiUser, loader } = useUser();
     const { name, email, avatar } = useUserData() as UserType;
 
-    console.log({ apiUser })
+    // User data loaded successfully
 
     const logoutHandler = async () => {
         await SecureStore.deleteItemAsync("accessToken");

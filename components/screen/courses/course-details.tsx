@@ -77,7 +77,7 @@ export default function CourseDetailsScreen() {
     const courseData = useMemo(() => params, [params]);
     const prerequisites = useMemo(() => {
         try {
-            const value = params?.prerequisites;
+            const value = params?.['prerequisites'];
             if (Array.isArray(value)) {
                 return JSON.parse(value[0] || '[]');
             }
@@ -85,11 +85,11 @@ export default function CourseDetailsScreen() {
         } catch {
             return [];
         }
-    }, [params?.prerequisites]);
+    }, [params?.['prerequisites']]);
 
     const benefits = useMemo(() => {
         try {
-            const value = params?.benefits;
+            const value = params?.['benefits'];
             if (Array.isArray(value)) {
                 return JSON.parse(value[0] || '[]');
             }
@@ -97,11 +97,11 @@ export default function CourseDetailsScreen() {
         } catch {
             return [];
         }
-    }, [params?.benefits]);
+    }, [params?.['benefits']]);
 
     const courseContent = useMemo(() => {
         try {
-            const value = params?.courseContent;
+            const value = params?.['courseContent'];
             if (Array.isArray(value)) {
                 return JSON.parse(value[0] || '[]');
             }
@@ -109,7 +109,7 @@ export default function CourseDetailsScreen() {
         } catch {
             return [];
         }
-    }, [params?.courseContent]);
+    }, [params?.['courseContent']]);
 
     // Calculate total lectures from course content
     const totalLectures = useMemo(() => {
@@ -130,12 +130,12 @@ export default function CourseDetailsScreen() {
             "build-your-mobile-app-development-career-with-react-native":
                 "https://res.cloudinary.com/dkg6jv4l0/image/upload/v1731448241/thumbnail_jwi5xo.png"
         };
-        const slug = Array.isArray(courseData.slug) ? courseData.slug[0] : courseData.slug;
-        return (slug in slugImageMap
+        const slug = Array.isArray(courseData['slug']) ? courseData['slug'][0] : courseData['slug'];
+        return (slug && slug in slugImageMap
             ? slugImageMap[slug as keyof typeof slugImageMap]
             : "https://res.cloudinary.com/dkg6jv4l0/image/upload/v1711468889/courses/spe7bcczfpjmtsdjzm6x.png"
         );
-    }, [courseData.slug]);
+    }, [courseData['slug']]);
 
     // Enhanced entrance animation - Fixed
     useEffect(() => {
@@ -180,7 +180,7 @@ export default function CourseDetailsScreen() {
                         flushFailedPurchasesCachedAsPendingAndroid();
                     }
                 } catch (error: any) {
-                    console.log("Error occured during initilization", error.message);
+                    // Error occurred during initialization
                 }
             }
         )()
@@ -192,15 +192,17 @@ export default function CourseDetailsScreen() {
                     try {
                         await finishTransaction({ purchase, isConsumable: false });
                     } catch (error) {
-                        console.log("An error occured while completing transaction", error);
+                        // Error occurred while completing transaction
+                        console.error('Error occurred while completing transaction', error);
                     }
                 }
             }
         );
 
-        const purchaseErrorSubscription = purchaseErrorListener((error) =>
-            console.log("Purchase error", error.message)
-        );
+        const purchaseErrorSubscription = purchaseErrorListener((error) => {
+            // Purchase error occurred
+            console.error('Purchase error occurred', error);
+        });
 
         return () => {
             endConnection();
@@ -217,27 +219,27 @@ export default function CourseDetailsScreen() {
         setReviewsLoader(true);
 
         try {
-            const response = await axios.get(`${API_URL}/reviews/${params.id}`);
+            const response = await axios.get(`${API_URL}/reviews/${params['id']}`);
             setReviews(response.data.reviewsData || []);
         } catch (error) {
-            console.log("Reviews fetch error:", error);
+            // Reviews fetch error occurred
             setReviews([]);
         } finally {
             setReviewsLoader(false);
         }
-    }, [params.id, activeButton, reviews.length]);
+    }, [params['id'], activeButton, reviews.length]);
 
     // Enhanced purchase handler with better error handling
     const handlePurchase = useCallback(async () => {
         setPurchaseLoader(true);
 
         try {
-            if (courseData.price === "0") {
+            if (courseData['price'] === "0") {
                 await setAuthorizationHeader();
                 await axios.post(
                     `${API_URL}/orders/free`,
                     {
-                        courseId: courseData.id,
+                        courseId: courseData['id'],
                     }
                 );
                 setPurchaseLoader(false);
@@ -250,8 +252,8 @@ export default function CourseDetailsScreen() {
                     try {
                         const requestPayload =
                             Platform.OS === "ios"
-                                ? { sku: product[0].productId }
-                                : { skus: [product[0].productId] }; // note the extra "s" depending of the platform.
+                                ? { sku: product[0]?.productId || '' }
+                                : { skus: [product[0]?.productId || ''] }; // note the extra "s" depending of the platform.
 
                         const purchase: any = await requestPurchase(requestPayload);
                         if (Platform.OS === "ios") {
@@ -262,7 +264,7 @@ export default function CourseDetailsScreen() {
                                     `${API_URL}/orders`,
                                     {
                                         receipt: purchase.transactionReceipt,
-                                        courseId: courseData.id,
+                                        courseId: courseData['id'],
                                         in_app_productId: product[0]?.productId,
                                     }
                                 );
@@ -288,7 +290,7 @@ export default function CourseDetailsScreen() {
                         }
                     } catch (error) {
                         setPurchaseLoader(false);
-                        console.log(error);
+                        // Error occurred
                     }
                 }
             }
@@ -327,7 +329,7 @@ export default function CourseDetailsScreen() {
 
     const userOrders = apiUser?.orders;
     const isPurchased = userOrders?.find(
-        (order) => order.courseId === courseData.id
+        (order) => order.courseId === courseData['id']
     );
 
     const styles = createStyles(theme);
@@ -403,22 +405,22 @@ export default function CourseDetailsScreen() {
                         transition={{ delay: 200 }}
                     >
                         <Text style={styles.courseTitle}>
-                            {courseData.name || courseData.title}
+                            {courseData['name'] || courseData['title']}
                         </Text>
 
                         <View style={styles.priceContainer}>
                             <View style={styles.priceSection}>
                                 {/* Show original price on top if it exists and is different */}
-                                {courseData?.estimatedPrice &&
-                                    courseData.estimatedPrice !== courseData.price &&
-                                    parseFloat(Array.isArray(courseData.estimatedPrice) ? courseData.estimatedPrice[0] : courseData.estimatedPrice) >
-                                    parseFloat(Array.isArray(courseData.price) ? courseData.price[0] : courseData.price) && (
+                                {courseData?.['estimatedPrice'] &&
+                                    courseData['estimatedPrice'] !== courseData['price'] &&
+                                    parseFloat(Array.isArray(courseData['estimatedPrice']) ? courseData['estimatedPrice'][0] || '0' : courseData['estimatedPrice'] || '0') >
+                                    parseFloat(Array.isArray(courseData['price']) ? courseData['price']?.[0] || '0' : courseData['price'] || '0') && (
                                         <Text style={styles.originalPrice}>
-                                            ${Array.isArray(courseData.estimatedPrice) ? courseData.estimatedPrice[0] : courseData.estimatedPrice}
+                                        ${Array.isArray(courseData['estimatedPrice']) ? courseData['estimatedPrice'][0] : courseData['estimatedPrice']}
                                         </Text>
                                     )}
                                 <Text style={styles.currentPrice}>
-                                    ${Array.isArray(courseData.price) ? courseData.price[0] : courseData.price}
+                                    ${Array.isArray(courseData['price']) ? courseData['price'][0] : courseData['price']}
                                 </Text>
                             </View>
 
@@ -430,7 +432,7 @@ export default function CourseDetailsScreen() {
                                         color={theme.dark ? "#ccc" : "#666"}
                                     />
                                     <Text style={styles.studentsCount}>
-                                        {courseData?.purchased || 0} Students
+                                        {courseData?.['purchased'] || 0} Students
                                     </Text>
                                 </View>
                                 <View style={styles.statItem}>
@@ -539,10 +541,10 @@ export default function CourseDetailsScreen() {
                                 </Text>
                                 <Text style={styles.description}>
                                     {isExpanded
-                                        ? courseData?.description
-                                        : courseData?.description?.slice(0, 302)}
+                                        ? courseData?.['description']
+                                        : courseData?.['description']?.slice(0, 302)}
                                 </Text>
-                                {courseData?.description?.length > 302 && (
+                                {courseData && courseData?.['description'] && courseData?.['description']?.length > 302 && (
                                     <TouchableOpacity
                                         style={styles.showMoreButton}
                                         onPress={toggleDescription}
@@ -675,7 +677,7 @@ export default function CourseDetailsScreen() {
                             </View>
                         ) : (
                             <Text style={styles.buttonText}>
-                                {isPurchased ? "Enter to course" : `Buy Course - $${courseData?.price}`}
+                                    {isPurchased ? "Enter to course" : `Buy Course - $${courseData?.['price']}`}
                             </Text>
                         )}
                     </TouchableOpacity>

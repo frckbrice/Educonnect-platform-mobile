@@ -1,50 +1,342 @@
-# Welcome to your Expo app 👋
+# EduConnected Mobile Platform 🚀
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A comprehensive cross-platform mobile learning management system built with React Native and Expo, designed to provide an exceptional educational experience for both learners and educators.
 
-## Get started
+## 📱 App Screenshots & UI Showcase
 
-1. Install dependencies
+### 🎯 Onboarding Experience
+Our intuitive onboarding flow guides users through the platform's key features:
 
-   ```bash
-   npm install
-   ```
+![Onboarding Community Exploration](public/sim_1.png)
+*Explore Our Community - Discover the perfect courses to enhance your career prospects*
 
-2. Start the app
+![Onboarding Course Completion](public/sim_2.png)
+*Complete Full Course - Achieve certification with dedicated effort*
 
-   ```bash
-    npx expo start
-   ```
+### 📚 Course Discovery & Learning
+Browse through our comprehensive course catalog and dive into interactive learning:
 
-In the output, you'll find options to open the app in a
+![Popular Courses](public/sim_3.png)
+*Popular Courses - Comprehensive project-based learning with real-world applications*
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+<!-- ### 🔐 Authentication & User Management
+Secure and seamless authentication experience:
 
-## Get a fresh project
+![Login Screen](public/images/screenshots/auth/login-screen.png)
+*User Login - Secure access to your learning journey*
 
-When you're ready, run:
+![Registration Form](public/images/screenshots/auth/registration-form.png)
+*User Registration - Join our educational community*
 
+### 👤 User Profile & Progress
+Track your learning progress and achievements:
+
+![User Profile](public/images/screenshots/profile/user-profile.png)
+*User Profile - Manage your account and view progress*
+
+![Learning Dashboard](public/images/screenshots/profile/learning-dashboard.png)
+*Learning Dashboard - Monitor your educational journey* -->
+
+## 🎨 Design Philosophy
+
+Our UI/UX design focuses on:
+- **Accessibility**: Inclusive design for all users
+- **Modern Aesthetics**: Clean, intuitive interfaces
+- **Mobile-First**: Optimized for mobile learning experiences
+- **Consistent Design Language**: Unified visual identity across all screens
+
+## 📱 Platform Support
+
+- **iOS**: Native iOS experience with platform-specific optimizations
+- **Android**: Material Design principles with Android-specific features
+- **Web**: Responsive web interface for cross-platform accessibility
+
+## 🔗 Image Assets
+
+All app screenshots and UI assets are organized in the `public/images/` directory:
+- **Screenshots**: Real app screens and user flows
+- **Mockups**: UI/UX design concepts and wireframes
+- **Icons**: App icons and interface elements
+- **Diagrams**: System architecture and user journey flows
+
+For detailed image organization and usage guidelines, see [Images Directory Documentation](public/images/README.md).
+
+---
+
+## 🚀 Features
+
+### Core Learning Features
+- **Course Management**: Comprehensive course catalog with search and filtering
+- **Interactive Lessons**: Video lessons with progress tracking
+- **Progress Monitoring**: Real-time learning analytics and achievements
+- **Social Learning**: Community features and peer collaboration
+
+### Technical Features
+- **Cross-Platform**: Single codebase for iOS, Android, and Web
+- **Offline Support**: Download courses for offline learning
+- **Push Notifications**: Stay updated with course progress and new content
+- **Secure Authentication**: OAuth 2.0 with Google and GitHub integration
+
+### Developer Experience
+- **TypeScript**: Full type safety and better development experience
+- **Modern Tooling**: ESLint, Prettier, Husky, and comprehensive testing
+- **Component Library**: Reusable UI components with Storybook documentation
+- **Performance**: Optimized for smooth animations and fast loading
+
+## 🛠️ Technology Stack
+
+### Frontend Framework
+- **React Native**: Cross-platform mobile development
+- **Expo**: Development platform and build tools
+- **TypeScript**: Type-safe development
+- **React Navigation**: Native navigation components
+
+### State Management & Data
+- **React Context**: Lightweight state management
+- **Axios**: HTTP client for API communication
+- **Secure Storage**: Encrypted credential storage
+- **Async Storage**: Local data persistence
+
+### UI & Animation
+- **React Native Reanimated**: Smooth, native animations
+- **Moti**: Declarative animation library
+- **Expo Blur**: Native blur effects
+- **Custom Components**: Tailored UI components
+
+### Development Tools
+- **ESLint**: Code quality and consistency
+- **Prettier**: Automated code formatting
+- **Jest**: Comprehensive testing framework
+- **Storybook**: Component development and documentation
+- **Husky**: Git hooks for quality assurance
+
+## 📋 Prerequisites
+
+- **Node.js** 18.0.0 or higher
+- **Yarn** 1.22.0 or higher (recommended) or **npm** 8.0.0 or higher
+- **Expo CLI** latest version
+- **Git** 2.20.0 or higher
+- **iOS Simulator** (for iOS development, macOS only)
+- **Android Studio** (for Android development)
+
+## 🚀 Quick Setup
+
+### Option 1: Automated Setup (Recommended)
 ```bash
-npm run reset-project
+# Clone the repository
+git clone https://github.com/franckbriceavom/educonnected-mobile-platform.git
+cd educonnected-mobile-platform
+
+# Run automated setup script
+node scripts/setup-dev.js
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Option 2: Manual Setup
+```bash
+# Clone the repository
+git clone https://github.com/franckbriceavom/educonnected-mobile-platform.git
+cd educonnected-mobile-platform
 
-## Learn more
+# Install dependencies
+yarn install
 
-To learn more about developing your project with Expo, look at the following resources:
+# Setup environment
+cp env.example .env
+# Edit .env with your configuration values
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+# Setup Git hooks
+yarn prepare
+```
 
-## Join the community
+### Environment Configuration
+```bash
+# Copy environment template
+cp env.example .env
 
-Join our community of developers creating universal apps.
+# Required environment variables:
+EXPO_PUBLIC_EAS_PROJECT_ID=your_eas_project_id
+EXPO_PUBLIC_BASE_URL=your_api_base_url
+GITHUB_CLIENT_ID=your_github_client_id
+# ... see env.example for complete list
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 🎮 Development Commands
+
+### Core Development
+```bash
+yarn start               # Start Expo development server
+yarn android             # Run on Android device/emulator
+yarn ios                 # Run on iOS simulator
+yarn web                 # Run on web browser
+```
+
+### Testing & Quality
+```bash
+yarn test                # Run tests with coverage
+yarn test:coverage       # Generate coverage report
+yarn test:ci             # Run tests in CI mode
+yarn lint                # Lint code
+yarn lint:fix            # Fix linting issues
+yarn type-check          # Check TypeScript types
+yarn format              # Format code with Prettier
+yarn format:check        # Check code formatting
+yarn check-logs          # Check for console.log statements
+```
+
+### Build & Deploy
+```bash
+yarn build:android       # Build Android APK/AAB
+yarn build:ios           # Build iOS app
+yarn build:all           # Build for all platforms
+yarn submit:android      # Submit to Google Play Store
+yarn submit:ios          # Submit to Apple App Store
+```
+
+### Project Management
+```bash
+yarn clean               # Clean and reset project
+yarn storybook           # Launch Storybook
+yarn storybook:build     # Build Storybook for production
+```
+
+## 🏗️ Project Structure
+
+```
+educonnected_platform_mobile/
+├── app/                    # Expo Router app directory
+│   ├── (routes)/          # Main app routes
+│   ├── api/               # API route handlers
+│   └── _layout.tsx        # Root layout component
+├── components/             # Reusable UI components
+│   ├── common/            # Shared components
+│   ├── screen/            # Screen-specific components
+│   └── card/              # Card components
+├── context/                # React Context providers
+├── hooks/                  # Custom React hooks
+├── utils/                  # Utility functions
+├── config/                 # Configuration files
+├── assets/                 # Static assets
+├── public/                 # Public assets and images
+│   └── images/            # App screenshots and UI assets
+├── scripts/                # Development scripts
+├── .storybook/             # Storybook configuration
+└── docs/                   # Documentation
+```
+
+## 🧪 Testing Strategy
+
+### Testing Framework
+- **Jest**: Unit and integration testing
+- **React Native Testing Library**: Component testing utilities
+- **Coverage Requirements**: 70% minimum coverage for all metrics
+- **Test Types**: Unit, integration, and component tests
+
+### Testing Commands
+```bash
+yarn test                 # Run all tests
+yarn test:coverage        # Generate coverage report
+yarn test:ci              # CI-optimized test run
+```
+
+### Test Structure
+```
+__tests__/                # Test files
+├── components/           # Component tests
+├── hooks/                # Hook tests
+├── utils/                # Utility function tests
+└── integration/          # Integration tests
+```
+
+## 📏 Code Quality
+
+### Linting & Formatting
+- **ESLint**: Advanced code quality with TypeScript and React Native rules
+- **Prettier**: Consistent code formatting across the project
+- **Husky**: Git hooks for pre-commit quality checks
+- **Lint-staged**: Run linters only on staged files
+
+### TypeScript Configuration
+- **Strict Mode**: Comprehensive type checking
+- **Path Aliases**: Clean import statements with `@/` prefixes
+- **Type Safety**: Full type coverage for better development experience
+
+### Git Hooks
+- **Pre-commit**: Automatic linting and formatting
+- **Commit-msg**: Conventional commit message validation
+
+## ⚡ Performance Optimization
+
+### React Native Optimizations
+- **Native Driver**: Hardware-accelerated animations
+- **Image Optimization**: Efficient image loading and caching
+- **Lazy Loading**: On-demand component loading
+- **Memory Management**: Optimized memory usage
+
+### Build Optimizations
+- **Metro Bundler**: Fast JavaScript bundling
+- **Tree Shaking**: Remove unused code
+- **Code Splitting**: Efficient bundle distribution
+
+## 🔒 Security Features
+
+### Authentication
+- **OAuth 2.0**: Secure social authentication
+- **JWT Tokens**: Stateless authentication
+- **Secure Storage**: Encrypted credential storage
+- **Token Refresh**: Automatic token renewal
+
+### Data Protection
+- **HTTPS Only**: Secure API communication
+- **Input Validation**: Comprehensive data validation
+- **XSS Protection**: Cross-site scripting prevention
+
+## 🚀 Deployment
+
+### EAS Build
+- **Cloud Builds**: Automated builds in the cloud
+- **Multi-Platform**: iOS, Android, and Web builds
+- **Environment Management**: Separate configs for dev/staging/prod
+
+### App Store Deployment
+- **Google Play Store**: Android app distribution
+- **Apple App Store**: iOS app distribution
+- **Automated Submission**: Streamlined deployment process
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details on:
+- Code of Conduct
+- Development Setup
+- Pull Request Process
+- Code Review Guidelines
+
+## 📚 Documentation
+
+- **Development Guide**: [DEVELOPMENT.md](DEVELOPMENT.md)
+- **Contributing Guide**: [CONTRIBUTING.md](CONTRIBUTING.md)
+- **API Documentation**: [API.md](docs/API.md)
+- **Component Library**: [Storybook](http://localhost:6006)
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- **Expo Team**: For the amazing development platform
+- **React Native Community**: For continuous improvements
+- **Open Source Contributors**: For making this project possible
+
+## 📞 Support
+
+- **Issues**: [GitHub Issues](https://github.com/franckbriceavom/educonnected-mobile-platform/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/franckbriceavom/educonnected-mobile-platform/discussions)
+- **Documentation**: [Project Wiki](https://github.com/franckbriceavom/educonnected-mobile-platform/wiki)
+
+---
+
+<div align="center">
+  <p><strong>Empowering education through technology</strong></p>
+  <p>Built with ❤️ by the EduConnected Team</p>
+</div>

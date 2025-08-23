@@ -89,7 +89,7 @@ export default function BottomCourseAccess({
                 // console.log("\n\n response", response.data.videos, "\n\n");
                 setVideoCompleteHistory(response.data.videos);
             } catch (error) {
-                console.error("Error fetching complete histories:", error);
+                // Error fetching complete histories
             }
         };
         fetch();
