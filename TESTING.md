@@ -2,7 +2,7 @@
 
 This document provides comprehensive information about testing in the EduConnected Mobile Platform project.
 
-## 📋 Table of Contents
+##  Table of Contents
 
 - [Overview](#overview)
 - [Testing Stack](#testing-stack)
@@ -15,7 +15,7 @@ This document provides comprehensive information about testing in the EduConnect
 - [Best Practices](#best-practices)
 - [Troubleshooting](#troubleshooting)
 
-## 🎯 Overview
+##  Overview
 
 Our testing strategy follows a **comprehensive, multi-layered approach** that ensures code quality, reliability, and maintainability:
 
@@ -205,7 +205,7 @@ describe('ComponentName', () => {
 - Keyboard navigation
 - Focus management
 
-## 🧰 Test Utilities
+##  Test Utilities
 
 ### Custom Render Function
 
@@ -253,7 +253,7 @@ await waitForAnimation();
 const result = await mockAsyncOperation('success', 100);
 ```
 
-## 🎭 Mocking
+##  Mocking
 
 ### Automatic Mocks
 
@@ -293,7 +293,7 @@ beforeEach(() => {
 });
 ```
 
-## 📊 Coverage
+##  Coverage
 
 ### Coverage Goals
 
@@ -325,7 +325,7 @@ coverageThreshold: {
 },
 ```
 
-## ✅ Best Practices
+##  Best Practices
 
 ### 1. **Test Organization**
 - Group related tests in describe blocks
