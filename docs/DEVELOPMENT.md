@@ -1,8 +1,8 @@
-# Development Guide 🚀
+# Development Guide
 
-This guide covers everything you need to know about developing the EduConnected Mobile Platform.
+This guide covers development setup and workflow for the EduConnected Mobile Platform.
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Prerequisites](#prerequisites)
 - [Quick Start](#quick-start)
@@ -15,15 +15,17 @@ This guide covers everything you need to know about developing the EduConnected 
 - [Deployment](#deployment)
 - [Troubleshooting](#troubleshooting)
 
-## 🎯 Prerequisites
+## Prerequisites
 
 ### Required Software
+
 - **Node.js** 18.0.0 or higher
 - **Yarn** 1.22.0 or higher (recommended) or **npm** 8.0.0 or higher
-- **Expo CLI** latest version
+- **Expo CLI** (latest)
 - **Git** 2.20.0 or higher
 
 ### Development Tools
+
 - **VS Code** (recommended) with extensions:
   - ESLint
   - Prettier
@@ -33,13 +35,15 @@ This guide covers everything you need to know about developing the EduConnected 
   - Bracket Pair Colorizer
 
 ### Platform-Specific Requirements
+
 - **iOS Development**: Xcode 14.0+ (macOS only)
 - **Android Development**: Android Studio, Android SDK
 - **Web Development**: Modern browser with ES6+ support
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Clone and Setup
+
 ```bash
 # Clone the repository
 git clone https://github.com/franckbriceavom/educonnected-mobile-platform.git
@@ -55,6 +59,7 @@ cp env.example .env
 ```
 
 ### 2. Environment Configuration
+
 ```bash
 # Copy environment template
 cp env.example .env
@@ -67,6 +72,7 @@ GITHUB_CLIENT_ID=your_github_client_id
 ```
 
 ### 3. Start Development
+
 ```bash
 # Start development server
 yarn start
@@ -77,7 +83,7 @@ yarn ios        # iOS
 yarn web        # Web
 ```
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 educonnected_platform_mobile/
@@ -96,14 +102,14 @@ educonnected_platform_mobile/
 ├── utils/                       # Utility functions
 ├── assets/                      # Images, fonts, static resources
 ├── scripts/                     # Development and build scripts
-├── .storybook/                  # Storybook configuration
 ├── .husky/                      # Git hooks
 └── docs/                        # Documentation
 ```
 
-## 🔄 Development Workflow
+## Development Workflow
 
 ### Git Workflow
+
 ```bash
 # Create feature branch
 git checkout -b feature/amazing-feature
@@ -117,6 +123,7 @@ git push origin feature/amazing-feature
 ```
 
 ### Commit Message Convention
+
 ```
 <type>(<scope>): <description>
 
@@ -140,6 +147,7 @@ Examples:
 ```
 
 ### Code Quality Checks
+
 ```bash
 # Lint code
 yarn lint
@@ -157,15 +165,17 @@ yarn format
 yarn format:check
 ```
 
-## 🧪 Testing Strategy
+## Testing Strategy
 
 ### Testing Levels
+
 1. **Unit Tests**: Individual component and function testing
 2. **Integration Tests**: Component interaction testing
 3. **E2E Tests**: Full user journey testing
 4. **Performance Tests**: Load time and memory usage
 
 ### Running Tests
+
 ```bash
 # Run all tests
 yarn test
@@ -180,64 +190,41 @@ yarn test:ci
 yarn test -- path/to/test.tsx
 ```
 
-### Test Structure
-```typescript
-// components/Button/Button.test.tsx
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
-import Button from './Button';
+See [TESTING.md](TESTING.md) for detailed test structure and examples.
 
-describe('Button Component', () => {
-  it('renders correctly', () => {
-    const { getByText } = render(<Button title="Press Me" />);
-    expect(getByText('Press Me')).toBeTruthy();
-  });
-
-  it('handles press events', () => {
-    const onPress = jest.fn();
-    const { getByText } = render(
-      <Button title="Press Me" onPress={onPress} />
-    );
-    
-    fireEvent.press(getByText('Press Me'));
-    expect(onPress).toHaveBeenCalledTimes(1);
-  });
-});
-```
-
-### Mocking Strategy
-- **Expo Modules**: Mocked in `jest.setup.js`
-- **React Native Modules**: Platform-specific mocks
-- **Third-party Libraries**: Jest mocks or manual mocks
-
-## 📏 Code Quality
+## Code Quality
 
 ### ESLint Configuration
+
 - **TypeScript**: Strict type checking
 - **React**: Hooks rules and JSX best practices
 - **React Native**: Platform-specific rules
 - **Import Order**: Organized and alphabetized imports
 
 ### Prettier Configuration
+
 - **Line Length**: 80 characters
 - **Quotes**: Single quotes
 - **Semicolons**: Required
 - **Trailing Commas**: ES5 compatible
 
 ### TypeScript Configuration
+
 - **Strict Mode**: Enabled
 - **Path Mapping**: Absolute imports with aliases
 - **Type Checking**: Comprehensive error checking
 
 ### Pre-commit Hooks
+
 - **Linting**: ESLint checks
 - **Formatting**: Prettier formatting
 - **Type Checking**: TypeScript compilation
 - **Tests**: Unit test execution
 
-## ⚡ Performance Optimization
+## Performance Optimization
 
 ### React Native Best Practices
+
 ```typescript
 // Use React.memo for expensive components
 const ExpensiveComponent = React.memo(({ data }) => {
@@ -256,6 +243,7 @@ const expensiveValue = useMemo(() => {
 ```
 
 ### Image Optimization
+
 ```typescript
 // Use Expo Image for better performance
 import { Image } from 'expo-image';
@@ -270,75 +258,63 @@ import { Image } from 'expo-image';
 ```
 
 ### Bundle Optimization
+
 - **Tree Shaking**: Remove unused code
 - **Code Splitting**: Lazy load components
 - **Asset Optimization**: Compress images and fonts
 
-## 🔒 Security Guidelines
+## Security Guidelines
 
 ### Authentication
+
 - **OAuth 2.0**: Secure third-party authentication
 - **JWT Tokens**: Stateless authentication
 - **Token Refresh**: Automatic token renewal
 - **Secure Storage**: Encrypted credential storage
 
 ### Data Protection
+
 - **HTTPS Only**: Secure API communication
 - **Input Validation**: Sanitize user inputs
-- **Error Handling**: Don't expose sensitive information
+- **Error Handling**: Do not expose sensitive information
 - **Environment Variables**: Secure configuration management
 
 ### Code Security
+
 - **Dependency Scanning**: Regular security audits
 - **Code Review**: Security-focused code reviews
 - **Access Control**: Principle of least privilege
 
-## 🚀 Deployment
+## Deployment
 
-### EAS Build Configuration
-```json
-{
-  "development": {
-    "developmentClient": true,
-    "distribution": "internal"
-  },
-  "preview": {
-    "distribution": "internal"
-  },
-  "production": {
-    "autoIncrement": true,
-    "android": { "buildType": "app-bundle" },
-    "ios": { "simulator": false }
-  }
-}
-```
+### EAS Build
 
-### Build Commands
+Production builds use Expo Application Services (EAS). See the root [README](../README.md) for build and submit commands.
+
 ```bash
-# Development build
-yarn build:android
-yarn build:ios
+# Production build (Android AAB / iOS)
+eas build --platform android --profile production
+eas build --platform ios --profile production
 
-# Production build
-yarn build:all
-
-# Submit to stores
-yarn submit:android
-yarn submit:ios
+# Submit to stores (after build)
+eas submit --platform android --profile production
+eas submit --platform ios --profile production
 ```
 
 ### Release Process
+
 1. **Version Bump**: Update version in `package.json`
-2. **Build**: Create production builds
+2. **Build**: Create production builds via EAS
 3. **Test**: Verify builds on devices
 4. **Submit**: Upload to app stores
 5. **Monitor**: Track release metrics
 
-## 🛠️ Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
 #### Metro Bundler Issues
+
 ```bash
 # Clear Metro cache
 yarn start --clear
@@ -351,6 +327,7 @@ yarn clean
 ```
 
 #### iOS Build Issues
+
 ```bash
 # Clean iOS build
 cd ios && xcodebuild clean && cd ..
@@ -363,6 +340,7 @@ cd ios && pod install && cd ..
 ```
 
 #### Android Build Issues
+
 ```bash
 # Clean Android build
 cd android && ./gradlew clean && cd ..
@@ -372,6 +350,7 @@ adb emu kill
 ```
 
 #### TypeScript Errors
+
 ```bash
 # Check types
 yarn type-check
@@ -381,52 +360,47 @@ rm -rf node_modules/.cache/typescript/
 ```
 
 ### Debug Tools
+
 - **React Native Debugger**: Advanced debugging
 - **Flipper**: Platform debugging
 - **Expo Dev Tools**: Development utilities
 - **Chrome DevTools**: Web debugging
 
 ### Performance Monitoring
+
 - **FPS Monitor**: Frame rate tracking
 - **Memory Profiler**: Memory usage analysis
 - **Network Inspector**: API call monitoring
 
-## 📚 Additional Resources
+## Additional Resources
 
 ### Documentation
+
 - [Expo Documentation](https://docs.expo.dev/)
 - [React Native Documentation](https://reactnative.dev/)
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/)
 
 ### Community
+
 - [Expo Discord](https://chat.expo.dev/)
 - [React Native Community](https://github.com/react-native-community)
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/react-native)
 
 ### Tools
+
 - [Expo Snack](https://snack.expo.dev/) - Online playground
 - [React Native Elements](https://reactnativeelements.com/) - UI components
 - [React Native Vector Icons](https://oblador.github.io/react-native-vector-icons/) - Icon library
 
----
+## Contributing
 
-## 🤝 Contributing
+We welcome contributions. See [Contributing Guide](CONTRIBUTING.md) for details.
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+## License
 
-## 📄 License
+This project is licensed under the MIT License. See the [LICENSE](../LICENSE) file for details.
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🆘 Support
+## Support
 
 - **Issues**: [GitHub Issues](https://github.com/franckbriceavom/educonnected-mobile-platform/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/franckbriceavom/educonnected-mobile-platform/discussions)
-- **Email**: [support@educonnected.com](mailto:support@educonnected.com)
-
----
-
-<div align="center">
-  <p>Happy coding! 🚀</p>
-  <p>Empowering education through technology</p>
-</div>

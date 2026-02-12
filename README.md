@@ -4,42 +4,6 @@
 
 A comprehensive cross-platform mobile learning management system built with React Native and Expo, designed to provide an exceptional educational experience for both learners and educators.
 
-##  App Screenshots & UI Showcase
-
-###  Onboarding Experience
-Our intuitive onboarding flow guides users through the platform's key features:
-
-![Onboarding Community Exploration](public/sim_1.png)
-*Explore Our Community - Discover the perfect courses to enhance your career prospects*
-
-![Onboarding Course Completion](public/sim_2.png)
-*Complete Full Course - Achieve certification with dedicated effort*
-
-###  Course Discovery & Learning
-Browse through our comprehensive course catalog and dive into interactive learning:
-
-![Popular Courses](public/sim_3.png)
-*Popular Courses - Comprehensive project-based learning with real-world applications*
-
-
-
-<!-- ###  Authentication & User Management
-Secure and seamless authentication experience:
-
-![Login Screen](public/images/screenshots/auth/login-screen.png)
-*User Login - Secure access to your learning journey*
-
-![Registration Form](public/images/screenshots/auth/registration-form.png)
-*User Registration - Join our educational community*
-
-###  User Profile & Progress
-Track your learning progress and achievements:
-
-![User Profile](public/images/screenshots/profile/user-profile.png)
-*User Profile - Manage your account and view progress*
-
-![Learning Dashboard](public/images/screenshots/profile/learning-dashboard.png)
-*Learning Dashboard - Monitor your educational journey* -->
 
 ##  Design Philosophy
 
@@ -250,7 +214,7 @@ __tests__/                # Test files
 - **Pre-commit**: Automatic linting and formatting
 - **Commit-msg**: Conventional commit message validation
 
-## ⚡ Performance Optimization
+## Performance Optimization
 
 ### React Native Optimizations
 - **Native Driver**: Hardware-accelerated animations
@@ -276,30 +240,48 @@ __tests__/                # Test files
 - **Input Validation**: Comprehensive data validation
 - **XSS Protection**: Cross-site scripting prevention
 
-##  Deployment
+## Deployment
 
-### EAS Build
-- **Cloud Builds**: Automated builds in the cloud
-- **Multi-Platform**: iOS, Android, and Web builds
-- **Environment Management**: Separate configs for dev/staging/prod
+### EAS Build (Expo Application Services)
 
-### App Store Deployment
-- **Google Play Store**: Android app distribution
-- **Apple App Store**: iOS app distribution
-- **Automated Submission**: Streamlined deployment process
+Builds run in the cloud via EAS. Profiles in `eas.json`: `development`, `preview`, `production`.
 
-##  Contributing
+**Local builds:**
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details on:
+```bash
+eas build --platform android --profile production
+eas build --platform ios --profile production
+eas build --platform all --profile production
+```
+
+**EAS Workflows:** The repo uses `.eas/workflows/build.yml` (EAS native CI/CD). It runs:
+- On push to `main` or version tags (`v*`, e.g. `v1.0.0`): builds Android and iOS with the `production` profile.
+- Manually: `eas workflow:run .eas/workflows/build.yml` and choose platform (all / android / ios).
+
+Link your GitHub repo in the [Expo project GitHub settings](https://expo.dev/accounts/[account]/projects/[project]/github) so push/tag events trigger builds. No `EXPO_TOKEN` in GitHub is required for EAS Workflows.
+
+### App store submission
+
+After a successful build, submit from the EAS dashboard or locally:
+
+```bash
+eas submit --platform android --profile production
+eas submit --platform ios --profile production
+```
+
+## Contributing
+
+We welcome contributions. See [Contributing Guide](docs/CONTRIBUTING.md) for:
 - Code of Conduct
 - Development Setup
 - Pull Request Process
 - Code Review Guidelines
 
-##  Documentation
+## Documentation
 
-- **Development Guide**: [DEVELOPMENT.md](DEVELOPMENT.md)
-- **Contributing Guide**: [CONTRIBUTING.md](CONTRIBUTING.md)
+- [Development Guide](docs/DEVELOPMENT.md)
+- [Contributing Guide](docs/CONTRIBUTING.md)
+- [Testing Guide](docs/TESTING.md)
 
 ##  License
 
@@ -319,8 +301,5 @@ This project is licensed under the MIT License -
 
 ---
 
-<div align="center">
-  <p><strong>Empowering education through technology</strong></p>
-  <p>Built with ❤️ by the EduConnected Team</p>
-</div>
+Built by the EduConnected Team.
 
