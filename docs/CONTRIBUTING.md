@@ -1,8 +1,8 @@
-# Contributing to EduConnected Mobile Platform 🤝
+# Contributing to EduConnected Mobile Platform
 
-Thank you for your interest in contributing to EduConnected! This guide will help you get started and understand our development process.
+Thank you for your interest in contributing to EduConnected. This guide explains our development process and how to get started.
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Code of Conduct](#code-of-conduct)
 - [Getting Started](#getting-started)
@@ -14,25 +14,28 @@ Thank you for your interest in contributing to EduConnected! This guide will hel
 - [Release Process](#release-process)
 - [Community Guidelines](#community-guidelines)
 
-## 📜 Code of Conduct
+## Code of Conduct
 
-This project and everyone participating in it is governed by our Code of Conduct. By participating, you are expected to uphold this code.
+This project is governed by our Code of Conduct. By participating, you are expected to uphold it.
 
 ### Our Standards
-- **Be respectful** and inclusive of all contributors
-- **Be collaborative** and open to different viewpoints
-- **Be constructive** in feedback and criticism
-- **Be professional** in all interactions
 
-## 🚀 Getting Started
+- Be respectful and inclusive of all contributors
+- Be collaborative and open to different viewpoints
+- Be constructive in feedback and criticism
+- Be professional in all interactions
+
+## Getting Started
 
 ### Prerequisites
+
 - Node.js 18.0.0 or higher
 - Yarn 1.22.0 or higher
 - Git 2.20.0 or higher
-- Expo CLI latest version
+- Expo CLI (latest)
 
 ### First Time Setup
+
 ```bash
 # Fork and clone the repository
 git clone https://github.com/YOUR_USERNAME/educonnected-mobile-platform.git
@@ -53,6 +56,7 @@ cp env.example .env
 ```
 
 ### Development Environment
+
 ```bash
 # Start development server
 yarn start
@@ -67,15 +71,17 @@ yarn lint
 yarn format
 ```
 
-## 🛠️ Development Setup
+## Development Setup
 
 ### Required Tools
-- **VS Code** with recommended extensions
-- **React Native Debugger** for debugging
-- **Flipper** for platform debugging
-- **Expo Dev Tools** for development utilities
+
+- VS Code with recommended extensions
+- React Native Debugger for debugging
+- Flipper for platform debugging
+- Expo Dev Tools for development utilities
 
 ### VS Code Extensions
+
 ```json
 {
   "recommendations": [
@@ -91,6 +97,7 @@ yarn format
 ```
 
 ### Git Configuration
+
 ```bash
 # Configure Git hooks
 yarn prepare
@@ -99,9 +106,10 @@ yarn prepare
 git config commit.template .gitmessage
 ```
 
-## 🔄 Making Changes
+## Making Changes
 
 ### Branch Strategy
+
 ```bash
 # Create feature branch from main
 git checkout main
@@ -116,6 +124,7 @@ git checkout -b docs/update-readme
 ```
 
 ### Development Workflow
+
 1. **Plan**: Understand the requirement and plan your approach
 2. **Code**: Implement the feature with tests
 3. **Test**: Ensure all tests pass and add new tests
@@ -126,6 +135,7 @@ git checkout -b docs/update-readme
 ### Code Style Guidelines
 
 #### TypeScript
+
 ```typescript
 // Use strict typing
 interface UserProps {
@@ -149,6 +159,7 @@ enum UserRole {
 ```
 
 #### React Components
+
 ```typescript
 // Use functional components with hooks
 import React, { useState, useCallback, useMemo } from 'react';
@@ -195,6 +206,7 @@ export const Button: React.FC<ButtonProps> = ({
 ```
 
 #### File Naming
+
 - **Components**: PascalCase (e.g., `UserProfile.tsx`)
 - **Hooks**: camelCase with `use` prefix (e.g., `useUser.ts`)
 - **Utilities**: camelCase (e.g., `formatDate.ts`)
@@ -202,6 +214,7 @@ export const Button: React.FC<ButtonProps> = ({
 - **Types**: PascalCase (e.g., `UserTypes.ts`)
 
 ### Import Organization
+
 ```typescript
 // 1. React and React Native imports
 import React, { useState } from 'react';
@@ -220,64 +233,21 @@ import { UserType } from '@/types/user';
 import { styles } from './styles';
 ```
 
-## 🧪 Testing
+## Testing
 
 ### Testing Requirements
+
 - **Unit Tests**: Required for all components and utilities
 - **Integration Tests**: Required for complex interactions
 - **Coverage**: Minimum 70% code coverage
 - **Performance**: No performance regressions
 
 ### Test Structure
-```typescript
-// components/Button/Button.test.tsx
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
-import { Button } from './Button';
 
-describe('Button Component', () => {
-  const defaultProps = {
-    title: 'Test Button',
-    onPress: jest.fn(),
-  };
-
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
-  it('renders with correct title', () => {
-    const { getByText } = render(<Button {...defaultProps} />);
-    expect(getByText('Test Button')).toBeTruthy();
-  });
-
-  it('calls onPress when pressed', () => {
-    const { getByText } = render(<Button {...defaultProps} />);
-    
-    fireEvent.press(getByText('Test Button'));
-    expect(defaultProps.onPress).toHaveBeenCalledTimes(1);
-  });
-
-  it('applies disabled state correctly', () => {
-    const { getByText } = render(
-      <Button {...defaultProps} disabled={true} />
-    );
-    
-    const button = getByText('Test Button');
-    expect(button.props.style.opacity).toBe(0.5);
-  });
-
-  it('applies variant styles correctly', () => {
-    const { getByText } = render(
-      <Button {...defaultProps} variant="secondary" />
-    );
-    
-    const button = getByText('Test Button');
-    expect(button.props.style.backgroundColor).toBe('#4A90E2');
-  });
-});
-```
+See [TESTING.md](TESTING.md) for test structure examples and running tests.
 
 ### Running Tests
+
 ```bash
 # Run all tests
 yarn test
@@ -295,9 +265,10 @@ yarn test --watch
 yarn test:ci
 ```
 
-## 🔀 Pull Request Process
+## Pull Request Process
 
 ### Before Submitting
+
 1. **Tests Pass**: Ensure all tests pass locally
 2. **Linting Clean**: Fix all ESLint and Prettier issues
 3. **Type Check**: Verify TypeScript compilation
@@ -305,6 +276,7 @@ yarn test:ci
 5. **Screenshots**: Add screenshots for UI changes
 
 ### PR Template
+
 ```markdown
 ## Description
 Brief description of the changes made.
@@ -341,14 +313,16 @@ Any additional information or context.
 ```
 
 ### PR Review Process
+
 1. **Automated Checks**: CI/CD pipeline runs tests and linting
 2. **Code Review**: At least one maintainer reviews the code
 3. **Testing**: Changes are tested on multiple platforms
 4. **Approval**: PR is approved and merged
 
-## 👀 Code Review Guidelines
+## Code Review Guidelines
 
 ### What to Look For
+
 - **Functionality**: Does the code work as intended?
 - **Performance**: Are there any performance implications?
 - **Security**: Are there any security vulnerabilities?
@@ -357,12 +331,14 @@ Any additional information or context.
 - **Documentation**: Is the code well-documented?
 
 ### Review Comments
-- **Be constructive** and specific
-- **Suggest alternatives** when possible
-- **Ask questions** to understand the approach
-- **Praise good work** and improvements
+
+- Be constructive and specific
+- Suggest alternatives when possible
+- Ask questions to understand the approach
+- Acknowledge good work and improvements
 
 ### Review Checklist
+
 - [ ] Code follows project style guidelines
 - [ ] All tests pass
 - [ ] No console.log statements in production code
@@ -371,23 +347,26 @@ Any additional information or context.
 - [ ] Performance implications considered
 - [ ] Security best practices followed
 
-## 🚀 Release Process
+## Release Process
 
 ### Version Management
-- **Patch**: Bug fixes (1.0.0 → 1.0.1)
-- **Minor**: New features (1.0.0 → 1.1.0)
-- **Major**: Breaking changes (1.0.0 → 2.0.0)
+
+- **Patch**: Bug fixes (1.0.0 to 1.0.1)
+- **Minor**: New features (1.0.0 to 1.1.0)
+- **Major**: Breaking changes (1.0.0 to 2.0.0)
 
 ### Release Steps
+
 1. **Version Bump**: Update version in `package.json`
 2. **Changelog**: Update `CHANGELOG.md`
-3. **Build**: Create production builds
+3. **Build**: Create production builds via EAS
 4. **Test**: Verify builds on devices
 5. **Tag**: Create Git tag for release
 6. **Deploy**: Submit to app stores
 7. **Document**: Update release notes
 
 ### Release Checklist
+
 - [ ] All tests pass
 - [ ] No known critical bugs
 - [ ] Performance benchmarks met
@@ -397,48 +376,41 @@ Any additional information or context.
 - [ ] Build artifacts created
 - [ ] App store submissions ready
 
-## 🌟 Community Guidelines
+## Community Guidelines
 
 ### Communication
-- **Be respectful** and professional
-- **Use inclusive language** and avoid jargon
-- **Provide context** when asking questions
-- **Be patient** with newcomers
+
+- Be respectful and professional
+- Use inclusive language and avoid jargon
+- Provide context when asking questions
+- Be patient with newcomers
 
 ### Getting Help
-- **Search existing issues** before creating new ones
-- **Provide detailed information** when reporting bugs
-- **Include reproduction steps** for issues
-- **Use appropriate issue templates**
+
+- Search existing issues before creating new ones
+- Provide detailed information when reporting bugs
+- Include reproduction steps for issues
+- Use appropriate issue templates
 
 ### Recognition
-- **Contributors** are listed in `CONTRIBUTORS.md`
-- **Significant contributions** are acknowledged in releases
-- **Community members** are celebrated for their work
 
-## 📚 Additional Resources
+- Contributors are listed in `CONTRIBUTORS.md`
+- Significant contributions are acknowledged in releases
+- Community members are acknowledged for their work
+
+## Additional Resources
 
 ### Documentation
+
 - [Development Guide](DEVELOPMENT.md)
-- [API Documentation](docs/API.md)
-- [Component Library](docs/COMPONENTS.md)
-- [Testing Guide](docs/TESTING.md)
+- [Testing Guide](TESTING.md)
 
 ### Tools
+
 - [Expo Documentation](https://docs.expo.dev/)
 - [React Native Documentation](https://reactnative.dev/)
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/)
 
-### Community
-to be coming
 ---
 
-## 🎉 Thank You!
-
-Thank you for contributing to EduConnected! Your contributions help make education more accessible and engaging for everyone.
-
----
-
-<div align="center">
-  <p>Together, we're empowering education through technology! 🚀</p>
-</div>
+Thank you for contributing to EduConnected.

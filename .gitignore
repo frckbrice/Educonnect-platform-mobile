@@ -68,7 +68,7 @@ buck-out/
 dist/
 web-build/
 
-# Native
+# Native and build artifacts (AAB/APK)
 *.orig.*
 *.jks
 *.p8
@@ -90,9 +90,10 @@ yarn-error.*
 .DS_Store
 *.pem
 
-# local env files
-.env*.local
+# Local env files (do not commit secrets)
 .env
+.env*.local
+*.env
 
 # typescript
 *.tsbuildinfo
